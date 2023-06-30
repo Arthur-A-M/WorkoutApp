@@ -30,37 +30,56 @@ export default function WorkoutScreen() {
     setWorkout(sessionName);
   };
 
+  const renderItem = ({ item, index }) => (
+    <Pressable
+      key={item.name}
+      onPress={() => Check(index)}
+      style={[styles.pressableExercises, {
+        backgroundColor: checkedExercise[index] ? 'transparent' : 'beige',
+        transform: [{ scale: checkedExercise[index] ? 1 : 1.2 }]
+      }]}
+    >
+      <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
+      {checkedExercise[index] ?
+        <Text style={[styles.text, {fontSize: 50}]}>{'\u2714'}</Text>
+        : null}
+      <View style={styles.viewData}>
+        <View style={styles.viewDataType}>
+          <Text style={styles.text}>Reps</Text>
+          <Text style={styles.text}>{item.repetitions}</Text>
+        </View>
+        <View style={[styles.viewDataType, { borderLeftWidth: 1, borderRightWidth: 1}]}>
+          <Text style={styles.text}>Séries</Text>
+          <Text style={styles.text}>{item.series}</Text>
+        </View>
+        <View style={styles.viewDataType}>
+          <Text style={styles.text}>Carga</Text>
+          <Text style={styles.text}>{item.load}</Text>
+        </View>
+      </View>
+    </Pressable>
+  );
+
   return (
     <View style={styles.container}>
-      {workout ?
-        (
-          <FlatList
-            data={session}
-            renderItem={({ item, index }) => (
-              <Pressable
-                key={item.name}
-                onPress={() => Check(index)}
-                style={[styles.pressable, {
-                  backgroundColor: checkedExercise[index] ? 'green' : 'transparent'
-                }]}
-              >
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.text}>{item.repetitions} Repetições</Text>
-                <Text style={styles.text}>{item.series} Séries</Text>
-                <Text style={styles.text}>{item.load}</Text>
-              </Pressable>
-            )}
-          />
-        )
-        : sessions.map((session, index) => (
+      {workout ? (
+        <FlatList
+          contentContainerStyle={{ alignItems: 'center' }}
+          data={session}
+          horizontal={true}
+          renderItem={renderItem}
+        />
+      ) : (
+        sessions.map((session, index) => (
           <Pressable
+            style={styles.pressableSeries}
             key={index}
             onPress={() => handlePress(session.sessionName)}
-            style={styles.pressable}
           >
-            <Text style={styles.text}>{session.sessionName}</Text>
+            <Text style={[styles.text, {fontSize: 35}]}>{session.sessionName}</Text>
           </Pressable>
-        ))}
+        ))
+      )}
     </View>
   );
 }
