@@ -5,13 +5,12 @@ import { styles } from './styles';
 
 export default function WorkoutScreen() {
   const [workout, setWorkout] = useState('');
-  const [checked, setChecked] = useState(null);
-  const [checked1, setChecked1] = useState([]);
+  const [checkedExercise, setCheckedExercise] = useState([]);
 
   useEffect(() => {
     const session = sessions.find(sessionElement => sessionElement.sessionName === workout);
     const checkedTemp = Array(session?.exercises.length || 0).fill(false);
-    setChecked1(checkedTemp);
+    setCheckedExercise(checkedTemp);
   }, [workout]);
 
   const getSessionExercises = (workout) => {
@@ -20,50 +19,48 @@ export default function WorkoutScreen() {
   };
 
   const Check = (index) => {
-    const checkedTemp = [...checked1];
+    const checkedTemp = [...checkedExercise];
     checkedTemp[index] = !checkedTemp[index];
-    setChecked1(checkedTemp);
+    setCheckedExercise(checkedTemp);
   }
 
   const session = getSessionExercises(workout);
 
   const handlePress = (sessionName) => {
     setWorkout(sessionName);
-    setChecked(sessionName);
   };
 
   return (
     <View style={styles.container}>
-      {sessions.map((session, index) => (
-        <Pressable
-          key={index}
-          onPress={() => handlePress(session.sessionName)}
-          style={{
-            backgroundColor: checked === session.sessionName ? 'green' : 'transparent'
-          }}
-        >
-          <Text>{session.sessionName}</Text>
-        </Pressable>
-      ))}
-      {workout ? (
-        <FlatList
-          data={session}
-          renderItem={({ item, index }) => (
-            <Pressable
-              key={item.name}
-              onPress={() => Check(index)}
-              style={{
-                backgroundColor: checked1[index] ? 'green' : 'transparent'
-              }}
-            >
-              <Text>{item.name}</Text>
-              <Text>{item.repetitions}</Text>
-              <Text>{item.series}</Text>
-              <Text>{item.load}</Text>
-            </Pressable>
-          )}
-        />
-      ) : null}
+      {workout ?
+        (
+          <FlatList
+            data={session}
+            renderItem={({ item, index }) => (
+              <Pressable
+                key={item.name}
+                onPress={() => Check(index)}
+                style={[styles.pressable, {
+                  backgroundColor: checkedExercise[index] ? 'green' : 'transparent'
+                }]}
+              >
+                <Text style={styles.text}>{item.name}</Text>
+                <Text style={styles.text}>{item.repetitions} Repetições</Text>
+                <Text style={styles.text}>{item.series} Séries</Text>
+                <Text style={styles.text}>{item.load}</Text>
+              </Pressable>
+            )}
+          />
+        )
+        : sessions.map((session, index) => (
+          <Pressable
+            key={index}
+            onPress={() => handlePress(session.sessionName)}
+            style={styles.pressable}
+          >
+            <Text style={styles.text}>{session.sessionName}</Text>
+          </Pressable>
+        ))}
     </View>
   );
 }
