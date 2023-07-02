@@ -12,18 +12,15 @@ export default function WorkoutScreen() {
   const [timer, setTimer] = useState(false);
   const [time, setTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [exercise, setExercise] = useState([]);
+
+  const Series = ['Serie A', 'Serie B', 'Serie C']
 
 
   useEffect(() => {
-    const session = sessions.find(sessionElement => sessionElement.sessionName === workout);
-    const checkedTemp = Array(session?.exercises.length || 0).fill(false);
+    const checkedTemp = Array(exercise?.length || 0).fill(false);
     setCheckedExercise(checkedTemp);
   }, [workout]);
-
-  const getSessionExercises = (workout) => {
-    const session = sessions.find(sessionElement => sessionElement.sessionName === workout);
-    return session?.exercises || [];
-  };
 
   const Check = (index) => {
     const checkedTemp = [...checkedExercise];
@@ -31,20 +28,12 @@ export default function WorkoutScreen() {
     setCheckedExercise(checkedTemp);
   }
 
-  const session = getSessionExercises(workout);
-
-  const handlePress = (sessionName) => {
-    setWorkout(sessionName);
-  };
 
   const renderItem = ({ item, index }) => (
     <Pressable
       key={item.name}
       onPress={() => Check(index)}
-      style={[styles.pressableExercises, {
-        backgroundColor: checkedExercise[index] ? 'transparent' : 'beige',
-        transform: [{ scale: checkedExercise[index] ? 1 : 1.2 }]
-      }]}
+      style={styles.pressableExercises}
     >
       <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
       {checkedExercise[index] ?
@@ -69,21 +58,23 @@ export default function WorkoutScreen() {
 
   const setUpExercises = async () => {
     try {
-      const value = await AsyncStorage.getItem('my-key');
-      if (value !== null) {
-        console.log(JSON.parse(value));
-      } else {
-        const jsonValue = JSON.stringify(sessions);
-        await AsyncStorage.setItem(`my-key`, jsonValue);
-      }
+        const value = await AsyncStorage.getItem(`${workout}`);
+        if (value !== null) {
+          const serie = JSON.parse(value);
+          setExercise(serie.exercises);
+          return setIsLoading(false);
+        } else { 
+          sessions.forEach( async element => {
+            const jsonValue = element.exercises;
+            await AsyncStorage.setItem(`${element.sessionName}`, JSON.stringify(element));
+            console.log(jsonValue);
+            alert('Serie criada');
+          });
+        }
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    setUpExercises();
-  }, []);
 
   useEffect(() => {
     let interval;
@@ -108,43 +99,30 @@ export default function WorkoutScreen() {
     return formattedTime;
   }
 
-  const getStored = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('my-key');
-      return console.log(JSON.parse(jsonValue));
-    } catch (e) {
-      // error reading value
-    }
-  }
-
   return (
     <View style={styles.container}>
-      {/*isLoading ?
-                <ActivityIndicator size="large" color="#0000ff" />
-  :null*/}
-      {workout ? (
+      {workout && (!isLoading) ? (
         <FlatList
           contentContainerStyle={{ alignItems: 'center' }}
-          data={session}
+          data={exercise}
           horizontal={true}
           renderItem={renderItem}
         />
       ) :
-        (
-          sessions.map((session, index) => (
-            <Pressable
-              style={styles.pressableSeries}
-              key={index}
-              onPress={() => handlePress(session.sessionName)}
-            >
-              <Text style={[styles.text, { fontSize: 35 }]}>{session.sessionName}</Text>
-            </Pressable>
-          ))
+        (Series.map((serie, index) => (
+          <Pressable
+            style={styles.pressableSeries}
+            key={index}
+            onPress={() => {setWorkout(serie); setUpExercises();}}
+          >
+            <Text style={[styles.text, { fontSize: 35 }]}>{serie}</Text>
+          </Pressable>
+        ))
         )}
-      {workout ? (
+      {workout && (!isLoading) ? (
         <Pressable
           style={styles.pressableTimer}
-          onPress={() => { setTimer(!timer); getStored(); }}
+          onPress={() => setTimer(!timer)}
         >
           {timer ?
             <Entypo name="controller-stop" size={30} color="black" />
