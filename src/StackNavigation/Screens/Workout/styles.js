@@ -8,30 +8,30 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pressableSeries: {
-    flex: 1, 
-    width: '90%', 
-    margin: 10, 
-    borderRadius: 10, 
-    borderWidth: 1, 
-    borderColor: 'black', 
-    backgroundColor: 'azure', 
+    flex: 1,
+    width: '90%',
+    margin: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'azure',
     justifyContent: 'center'
   },
-  viewData: { 
-  flexDirection: 'row', 
-  justifyContent: 'space-between', 
-  width: '100%', 
-  height: 80 
+  viewData: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: 80
   },
   viewDataType: {
-  flex: 1, 
-  justifyContent: 'space-around',
-  borderColor: 'black',
-  borderTopWidth: 1
+    flex: 1,
+    justifyContent: 'space-around',
+    borderColor: 'black',
+    borderTopWidth: 1
   },
   pressableExercises: {
-    width: Dimensions.get('window').width*0.6,
-    height: Dimensions.get('window').height*0.7,
+    width: Dimensions.get('window').width * 0.6,
+    height: Dimensions.get('window').height * 0.7,
     marginVertical: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -44,5 +44,17 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  }
+  },
+  pressableTimer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: Dimensions.get('window').width * 0.6,
+    height: 50,
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+  },
 });
