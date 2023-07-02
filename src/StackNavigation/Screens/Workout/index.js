@@ -1,4 +1,4 @@
-import { Text, View, Pressable, FlatList } from 'react-native';
+import { Text, View, Pressable, FlatList, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,6 +11,7 @@ export default function WorkoutScreen() {
   const [checkedExercise, setCheckedExercise] = useState([]);
   const [timer, setTimer] = useState(false);
   const [time, setTime] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -66,25 +67,23 @@ export default function WorkoutScreen() {
     </Pressable>
   );
 
-const setUpExercises = async () => {
-  try {
-    const value = await AsyncStorage.getItem('my-key');
-    if (value !== null) {
-      console.log(JSON.parse(value));
-    } else {
-      for (let index = 0; index < sessions.length; index++) {
-        const jsonValue = JSON.stringify(sessions[index]);
-        await AsyncStorage.setItem(`${sessions[index].sessionName}`, jsonValue);
+  const setUpExercises = async () => {
+    try {
+      const value = await AsyncStorage.getItem('my-key');
+      if (value !== null) {
+        console.log(JSON.parse(value));
+      } else {
+        const jsonValue = JSON.stringify(sessions);
+        await AsyncStorage.setItem(`my-key`, jsonValue);
       }
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-  }
-};
+  };
 
-useEffect(() => {
-  setUpExercises();
-}, []);
+  useEffect(() => {
+    setUpExercises();
+  }, []);
 
   useEffect(() => {
     let interval;
@@ -108,10 +107,21 @@ useEffect(() => {
     const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
     return formattedTime;
   }
-  
+
+  const getStored = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('my-key');
+      return console.log(JSON.parse(jsonValue));
+    } catch (e) {
+      // error reading value
+    }
+  }
 
   return (
     <View style={styles.container}>
+      {/*isLoading ?
+                <ActivityIndicator size="large" color="#0000ff" />
+  :null*/}
       {workout ? (
         <FlatList
           contentContainerStyle={{ alignItems: 'center' }}
@@ -134,7 +144,7 @@ useEffect(() => {
       {workout ? (
         <Pressable
           style={styles.pressableTimer}
-          onPress={() => setTimer(!timer)}
+          onPress={() => { setTimer(!timer); getStored(); }}
         >
           {timer ?
             <Entypo name="controller-stop" size={30} color="black" />
