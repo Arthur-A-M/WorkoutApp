@@ -14,7 +14,7 @@ export default function WorkoutScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [exercise, setExercise] = useState([]);
 
-  const Series = ['Serie A', 'Serie B', 'Serie C']
+  const Series = ['Serie A', 'Serie B', 'Serie C'];
 
 
   useEffect(() => {
@@ -31,50 +31,57 @@ export default function WorkoutScreen() {
 
   const renderItem = ({ item, index }) => (
     <Pressable
-      key={item.name}
+      key={item[0]}
       onPress={() => Check(index)}
       style={styles.pressableExercises}
     >
-      <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
+      <Text style={[styles.text, { marginTop: 10 }]}>{item[0]}</Text>
       {checkedExercise[index] ?
         <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>
         : null}
       <View style={styles.viewData}>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Reps</Text>
-          <Text style={styles.text}>{item.repetitions}</Text>
+          <Text style={styles.text}>{item[1]}</Text>
         </View>
         <View style={[styles.viewDataType, { borderLeftWidth: 1, borderRightWidth: 1 }]}>
           <Text style={styles.text}>Séries</Text>
-          <Text style={styles.text}>{item.series}</Text>
+          <Text style={styles.text}>{item[2]}</Text>
         </View>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Carga</Text>
-          <Text style={styles.text}>{item.load}</Text>
+          <Text style={styles.text}>{item[3]}</Text>
         </View>
       </View>
     </Pressable>
   );
 
-  const setUpExercises = async () => {
-    try {
-        const value = await AsyncStorage.getItem(`${workout}`);
-        if (value !== null) {
-          const serie = JSON.parse(value);
-          setExercise(serie.exercises);
-          return setIsLoading(false);
-        } else { 
-          sessions.forEach( async element => {
-            const jsonValue = element.exercises;
-            await AsyncStorage.setItem(`${element.sessionName}`, JSON.stringify(element));
-            console.log(jsonValue);
-            alert('Serie criada');
-          });
-        }
-    } catch (e) {
-      console.log(e);
+const getData = async (i) => {
+  let array = [];
+  console.log(Array.isArray(Series));
+  try {
+    const jsonValue = await AsyncStorage.getItem(`${Series[i]}`);
+    if (jsonValue != null) {
+      const parsedValue = JSON.parse(jsonValue);
+        parsedValue.map(element => {
+        console.log(typeof element.load);
+        array.push([
+          element.name,
+          JSON.stringify(element.repetitions),
+          JSON.stringify(element.series),
+          element.load
+        ]);
+      });
+      setExercise(array);
+      setIsLoading(false);
+      setWorkout(`${Series[2]}`);
+      console.log(array, Array.isArray(array));
+      console.log(exercise ,Array.isArray(exercise[0]));
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
+};
 
   useEffect(() => {
     let interval;
@@ -113,7 +120,7 @@ export default function WorkoutScreen() {
           <Pressable
             style={styles.pressableSeries}
             key={index}
-            onPress={() => {setWorkout(serie); setUpExercises();}}
+            onPress={() => getData(index)}
           >
             <Text style={[styles.text, { fontSize: 35 }]}>{serie}</Text>
           </Pressable>
