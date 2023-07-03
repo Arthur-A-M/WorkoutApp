@@ -30,7 +30,7 @@ export const sessions = [
           name: 'Triceps corda',
           repetitions: 12,
           series: 3,
-          load: '23.5 kg',
+          load: '24.5 kg',
         },
         {
           name: 'Gemeas maquina',
@@ -86,10 +86,10 @@ export const sessions = [
           load: '23 kg',
         },
         {
-          name: 'Abdominal maquina',
-          repetitions: 15,
+          name: 'Abdominal supra solo',
+          repetitions: 20,
           series: 4,
-          load: '70 kg',
+          load: 'livre',
         },
       ],
     },
@@ -147,3 +147,5 @@ export const sessions = [
       ],
     },
   ];
+
+export const series = ['Serie A', 'Serie B', 'Serie C'];

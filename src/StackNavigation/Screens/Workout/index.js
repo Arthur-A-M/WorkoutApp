@@ -1,44 +1,59 @@
 import { Text, View, Pressable, FlatList, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { getExerciseArray, ReturnTime } from '../../../Functions';
+import { renderExercise } from '../../../Components';
+import { series } from './data';
 
 import { styles } from './styles';
-import { sessions } from './data';
+
 
 export default function WorkoutScreen() {
   const [workout, setWorkout] = useState('');
-  const [checkedExercise, setCheckedExercise] = useState([]);
-  const [timer, setTimer] = useState(false);
+  const [checkedExercises, setCheckedExercises] = useState([]);
+  const [timerRunning, setTimerRunning] = useState(false);
   const [time, setTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [exercise, setExercise] = useState([]);
-
-  const Series = ['Serie A', 'Serie B', 'Serie C'];
-
+  const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
-    const checkedTemp = Array(exercise?.length || 0).fill(false);
-    setCheckedExercise(checkedTemp);
-  }, [workout]);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 750);
 
-  const Check = (index) => {
-    const checkedTemp = [...checkedExercise];
-    checkedTemp[index] = !checkedTemp[index];
-    setCheckedExercise(checkedTemp);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [exercises]);
+
+  const fetchExercises = async (newWorkout) => {
+    const newExercises = await getExerciseArray(newWorkout);
+    setExercises(newExercises);
   }
 
+  useEffect(() => {
+    const checkedTemp = Array(exercises?.length || 0).fill(false);
+    setCheckedExercises(checkedTemp);
+    fetchExercises(workout);
+  }, [workout]);
 
-  const renderItem = ({ item, index }) => (
+const renderExercise = ({ item, index }) => {
+  const toggleCheck = (index) => {
+    const checkedTemp = [...checkedExercises];
+    checkedTemp[index] = !checkedTemp[index];
+    setCheckedExercises(checkedTemp);
+  }
+  return (
     <Pressable
       key={item[0]}
-      onPress={() => Check(index)}
+      onPress={() => toggleCheck(index)}
       style={styles.pressableExercises}
     >
       <Text style={[styles.text, { marginTop: 10 }]}>{item[0]}</Text>
-      {checkedExercise[index] ?
+      {checkedExercises[index] ? (
         <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>
-        : null}
+      ) : null}
       <View style={styles.viewData}>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Reps</Text>
@@ -55,37 +70,11 @@ export default function WorkoutScreen() {
       </View>
     </Pressable>
   );
-
-const getData = async (i) => {
-  let array = [];
-  console.log(Array.isArray(Series));
-  try {
-    const jsonValue = await AsyncStorage.getItem(`${Series[i]}`);
-    if (jsonValue != null) {
-      const parsedValue = JSON.parse(jsonValue);
-        parsedValue.map(element => {
-        console.log(typeof element.load);
-        array.push([
-          element.name,
-          JSON.stringify(element.repetitions),
-          JSON.stringify(element.series),
-          element.load
-        ]);
-      });
-      setExercise(array);
-      setIsLoading(false);
-      setWorkout(`${Series[2]}`);
-      console.log(array, Array.isArray(array));
-      console.log(exercise ,Array.isArray(exercise[0]));
-    }
-  } catch (e) {
-    console.log(e);
-  }
 };
 
   useEffect(() => {
     let interval;
-    if (timer) {
+    if (timerRunning) {
       interval = setInterval(() => {
         setTime(prevTime => prevTime + 1);
       }, 1000);
@@ -94,49 +83,40 @@ const getData = async (i) => {
       setTime(0);
     }
     return () => clearInterval(interval);
-  }, [timer]);
-
-  const ReturnTime = (time) => {
-    const timeInSeconds = time;
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    const formattedMinutes = minutes.toLocaleString('en-US', { minimumIntegerDigits: 2 });
-    const formattedSeconds = seconds.toLocaleString('en-US', { minimumIntegerDigits: 2 });
-    const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
-    return formattedTime;
-  }
+  }, [timerRunning]);
 
   return (
     <View style={styles.container}>
-      {workout && (!isLoading) ? (
+      {workout && !isLoading ? (
         <FlatList
           contentContainerStyle={{ alignItems: 'center' }}
-          data={exercise}
+          data={exercises}
           horizontal={true}
-          renderItem={renderItem}
+          renderItem={renderExercise}
         />
       ) :
-        (Series.map((serie, index) => (
+        (series.map((serie, index) => (
           <Pressable
             style={styles.pressableSeries}
             key={index}
-            onPress={() => getData(index)}
+            onPress={() => setWorkout(`${serie}`)}
           >
             <Text style={[styles.text, { fontSize: 35 }]}>{serie}</Text>
           </Pressable>
         ))
         )}
-      {workout && (!isLoading) ? (
+      {workout && !isLoading ? (
         <Pressable
           style={styles.pressableTimer}
-          onPress={() => setTimer(!timer)}
+          onPress={() => setTimerRunning(!timerRunning)}
         >
-          {timer ?
+          {timerRunning ?
             <Entypo name="controller-stop" size={30} color="black" />
             : <AntDesign name="play" size={30} color="black" />}
-          <Text style={[styles.text, { fontSize: 35 }]}>{timer ? ReturnTime(time) : 'Descansar'}</Text>
+          <Text style={[styles.text, { fontSize: 35 }]}>{timerRunning ? ReturnTime(time) : 'Descansar'}</Text>
         </Pressable>
       ) : null}
     </View>
   );
 }
+
