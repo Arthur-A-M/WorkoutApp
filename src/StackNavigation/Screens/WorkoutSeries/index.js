@@ -1,12 +1,9 @@
-import { Text, View, Pressable, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { AntDesign, Entypo } from '@expo/vector-icons';
 
-import { getObjectData, ReturnTime } from '../../../Functions';
-import { renderExercise } from '../../../Components';
+import { getObjectData } from '../../../Functions';
 
 import { styles } from './styles';
-
 
 export default function WorkoutSeriesScreen({ navigation, route }) {
     const [exercises, setExercises] = useState([]);
@@ -14,11 +11,10 @@ export default function WorkoutSeriesScreen({ navigation, route }) {
     const { series } = route.params;
 
     useEffect(() => {
-        navigation.navigate('Workout', { exercises: exercises });
+        navigation.navigate('Workout', { exercises });
     }, [exercises]);
 
     const fetchExercises = async (serie) => {
-        console.log(serie);
         const newExercises = await getObjectData(serie);
         setExercises(newExercises);
     }
@@ -29,7 +25,7 @@ export default function WorkoutSeriesScreen({ navigation, route }) {
                 <Pressable
                     style={styles.pressableSeries}
                     key={index}
-                    onPress={() => fetchExercises(`${serie}`)}
+                    onPress={() => fetchExercises(serie)}
                 >
                     <Text style={[styles.text, { fontSize: 35 }]}>{serie}</Text>
                 </Pressable>

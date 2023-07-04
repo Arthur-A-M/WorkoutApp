@@ -7,27 +7,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  pressableSeries: {
-    flex: 1,
-    width: '90%',
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'azure',
-    justifyContent: 'center'
-  },
   viewData: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    height: 80
+    height: 80,
   },
   viewDataType: {
     flex: 1,
     justifyContent: 'space-around',
     borderColor: 'black',
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
   pressableExercises: {
     width: Dimensions.get('window').width * 0.6,

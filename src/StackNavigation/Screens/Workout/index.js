@@ -1,9 +1,8 @@
-import { Text, View, Pressable, FlatList, ActivityIndicator } from 'react-native';
+import { Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-import { getExerciseArray, ReturnTime } from '../../../Functions';
-import { renderExercise } from '../../../Components';
+import { ReturnTime } from '../../../Functions';
 
 import { styles } from './styles';
 
@@ -18,7 +17,6 @@ export default function WorkoutScreen({ route }) {
   useEffect(() => {
     const checkedTemp = Array(exercises?.length || 0).fill(false);
     setCheckedExercises(checkedTemp);
-    console.log('exercises received by the workout screen is:',exercises, Array.isArray(exercises));
   }, []);
 
   const toggleCheck = (index) => {
@@ -66,6 +64,22 @@ export default function WorkoutScreen({ route }) {
     return () => clearInterval(interval);
   }, [timerRunning]);
 
+  const renderTimerIcon = () => {
+    if (timerRunning) {
+      return <Entypo name="controller-stop" size={30} color="black" />;
+    } else {
+      return <AntDesign name="play" size={30} color="black" />;
+    }
+  };
+
+  const renderTimerText = () => {
+    if (timerRunning) {
+      return ReturnTime(time);
+    } else {
+      return 'Descansar';
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -75,14 +89,8 @@ export default function WorkoutScreen({ route }) {
         renderItem={renderExercise}
       />
       <Pressable style={styles.pressableTimer} onPress={() => setTimerRunning(!timerRunning)}>
-        {timerRunning ? (
-          <Entypo name="controller-stop" size={30} color="black" />
-        ) : (
-          <AntDesign name="play" size={30} color="black" />
-        )}
-        <Text style={[styles.text, { fontSize: 35 }]}>
-          {timerRunning ? ReturnTime(time) : 'Descansar'}
-        </Text>
+        {renderTimerIcon()}
+        <Text style={[styles.text, { fontSize: 35 }]}>{renderTimerText()}</Text>
       </Pressable>
     </View>
   );

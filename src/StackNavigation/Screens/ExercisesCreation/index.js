@@ -1,11 +1,9 @@
-import { Text, View, Pressable, ActivityIndicator, TextInput, FlatList } from 'react-native';
+import { Text, View, Pressable, TextInput, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { storeObjectData, getExerciseArray, getStringData } from '../../../Functions';
+import { storeObjectData, getStringData } from '../../../Functions';
 
 import { styles } from './styles';
-import { sessions, series, login } from '../Workout/data';
 
 export default function ExercisesCreationScreen({ route }) {
     const [numberOfExercises, setNumberOfExercises] = useState(0);
@@ -70,7 +68,7 @@ const handleFooterPress = async () => {
         <Pressable onPress={defineListOfexercises}>
           <Text>Define exercises</Text>
           <TextInput
-            style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.TextInput}
             value={numberOfExercises}
             onChangeText={(value) => setNumberOfExercises(parseInt(value))}
             keyboardType="numeric"

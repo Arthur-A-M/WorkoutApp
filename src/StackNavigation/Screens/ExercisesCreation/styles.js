@@ -7,4 +7,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  TextInput: { 
+    height: 40,
+    width: 200, 
+    borderColor: 'gray', 
+    borderWidth: 1 
+  }
 });

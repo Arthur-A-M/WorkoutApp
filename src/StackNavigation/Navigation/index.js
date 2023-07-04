@@ -10,8 +10,8 @@ import SeriesSelectionCreation from '../Screens/SeriesSelectionCreation';
 import ExercisesCreationScreen from '../Screens/ExercisesCreation';
 import WorkoutSeriesScreen from '../Screens/WorkoutSeries';
 
-
 const Stack = createStackNavigator();
+
 export default function Navigation() {
     const screens = [
         { name: "Home", component: HomeScreen },
