@@ -28,7 +28,8 @@ export default function WorkoutScreen({ route }) {
   const renderExercise = ({ item, index }) => (
     <Pressable
       key={item[0]}
-      onPress={() => toggleCheck(index)}
+      onLongPress={() => toggleCheck(index)}
+      delayLongPress={300}
       style={styles.pressableExercises}
     >
       <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
