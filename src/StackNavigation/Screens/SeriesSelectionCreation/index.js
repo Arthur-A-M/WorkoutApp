@@ -7,7 +7,7 @@ import { storeObjectData, getExerciseArray, getStringData } from '../../../Funct
 import { styles } from './styles';
 import { sessions, series, login } from '../Workout/data';
 
-export default function SeriesExercisesCreationScreen({ navigation }) {
+export default function SeriesSelectionCreation({ navigation }) {
     const [seriesNames, setSeriesNames] = useState([]);
 
     useEffect(() => {

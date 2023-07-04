@@ -6,8 +6,9 @@ import HomeScreen from '../Screens/Home';
 import WorkoutScreen from '../Screens/Workout';
 import HIITScreen from '../Screens/HIIT';
 import SeriesNamesCreationScreen from '../Screens/SeriesNamesCreation';
-import SeriesExercisesCreationScreen from '../Screens/SeriesExercisesCreation';
+import SeriesSelectionCreation from '../Screens/SeriesSelectionCreation';
 import ExercisesCreationScreen from '../Screens/ExercisesCreation';
+import WorkoutSeriesScreen from '../Screens/WorkoutSeries';
 
 
 const Stack = createStackNavigator();
@@ -15,10 +16,12 @@ export default function Navigation() {
     const screens = [
         { name: "Home", component: HomeScreen },
         { name: "Workout", component: WorkoutScreen },
+        { name: "WorkoutSeries", component: WorkoutSeriesScreen },
         { name: "HIIT", component: HIITScreen },
         { name: "SeriesNamesCreation", component: SeriesNamesCreationScreen },
-        { name: "SeriesExercisesCreation", component: SeriesExercisesCreationScreen },
-        { name: "ExercisesCreation", component: ExercisesCreationScreen }
+        { name: "SeriesExercisesCreation", component: SeriesSelectionCreation },
+        { name: "ExercisesCreation", component: ExercisesCreationScreen },
+        
     ];
 
     return (

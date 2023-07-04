@@ -32,20 +32,20 @@ export default function ExercisesCreationScreen({ route }) {
       setExercises(updatedExercises);
     };
   
-    const renderExercise = ({ item, index }) => {
-      return (
-        <View style={{ marginTop: 20 }}>
-          {Object.keys(item).map((key) => (
-            <TextInput
-              style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1 }}
-              key={`${index} ${key}`}
-              value={String(item[key])}
-              onChangeText={(value) => handleInputChange(index, key, value)}
-            />
-          ))}
-        </View>
-      );
-    };
+const renderExercise = ({ item, index }) => {
+  return (
+    <View style={{ marginTop: 20 }}>
+      {Object.keys(item).map((key) => (
+        <TextInput
+          style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1 }}
+          key={`${index} ${key}`}
+          value={String(item[key])} // Convert the value to a string
+          onChangeText={(value) => handleInputChange(index, key, value)}
+        />
+      ))}
+    </View>
+  );
+};
   
     const defineListOfexercises = () => {
       const updatedExercises = Array.from({ length: numberOfExercises }, () => ({

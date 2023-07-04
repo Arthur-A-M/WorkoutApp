@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeData, getExerciseArray, getStringData } from '../../../Functions';
 
 import { styles } from './styles';
-import { sessions, login } from '../Workout/data';
+import { login } from '../Workout/data';
 
 export default function HomeScreen({ navigation }) {
   const [localDataChecked, setLocalDataChecked] = useState(false);
@@ -37,7 +37,7 @@ export default function HomeScreen({ navigation }) {
         <View>
           <Pressable
             onPress={localDataChecked ? 
-              () => navigation.navigate('Workout', { series: series }) 
+              () => navigation.navigate('WorkoutSeries', { series: series }) 
               : alert('No session found!')}//Buggued alerts even when there os a session
           >
             <Text>Go to Workout Screen</Text>

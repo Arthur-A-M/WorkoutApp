@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Series = ['Serie A', 'Serie B', 'Serie C'];
 export const getExerciseArray = async (key) => {
     let array = [];
     try {
@@ -31,6 +30,16 @@ export const getExerciseArray = async (key) => {
     } catch (e) {
       console.log(e);
       return null;
+    }
+  };
+
+  export const getObjectData = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(`${key}`);
+      console.log('the object retrived is:', jsonValue);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
     }
   };
 
