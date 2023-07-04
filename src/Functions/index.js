@@ -34,7 +34,7 @@ export const getExerciseArray = async (key) => {
     }
   };
 
-  export const storeData = async (key, value) => {
+  export const storeObjectData = async (key, value) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(key, jsonValue);

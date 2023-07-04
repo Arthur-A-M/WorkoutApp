@@ -4,18 +4,19 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { getExerciseArray, ReturnTime } from '../../../Functions';
 import { renderExercise } from '../../../Components';
-import { series } from './data';
 
 import { styles } from './styles';
 
 
-export default function WorkoutScreen() {
+export default function WorkoutScreen({ route }) {
   const [workout, setWorkout] = useState('');
   const [checkedExercises, setCheckedExercises] = useState([]);
   const [timerRunning, setTimerRunning] = useState(false);
   const [time, setTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [exercises, setExercises] = useState([]);
+
+  const { series } = route.params;
 
   useEffect(() => {
     const timer = setTimeout(() => {

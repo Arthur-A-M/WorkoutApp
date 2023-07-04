@@ -5,22 +5,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { storeData, getExerciseArray, getStringData } from '../../../Functions';
 
 import { styles } from './styles';
-import { sessions, series, login } from '../Workout/data';
+import { sessions, login } from '../Workout/data';
 
 export default function HomeScreen({ navigation }) {
   const [localDataChecked, setLocalDataChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [series, setSeries] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const response = await getStringData(`${login}`);
       if (response) {
         setLocalDataChecked(true);
+        setSeries(JSON.parse(response));
       }
-      setIsLoading(false);
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (series) {
+      setIsLoading(false);
+    }
+  },[series]);
 
   return (
     <View style={styles.container}>
@@ -29,7 +36,9 @@ export default function HomeScreen({ navigation }) {
       ) : (
         <View>
           <Pressable
-            onPress={localDataChecked ? () => navigation.navigate('Workout') : alert('No session found!')}
+            onPress={localDataChecked ? 
+              () => navigation.navigate('Workout', { series: series }) 
+              : alert('No session found!')}//Buggued alerts even when there os a session
           >
             <Text>Go to Workout Screen</Text>
           </Pressable>
@@ -37,10 +46,10 @@ export default function HomeScreen({ navigation }) {
             <Text>Go to HIIT Screen</Text>
           </Pressable>
           <Pressable onPress={() => navigation.navigate('SeriesNamesCreation')}>
-            <Text>Go to WorkoutCreation Screen</Text>
+            <Text>Go to SeriesNamesCreation Screen</Text>
           </Pressable>
           <Pressable onPress={() => navigation.navigate('SeriesExercisesCreation')}>
-            <Text>Go to SeriesNamesCreation Screen</Text>
+            <Text>Go to SeriesExercisesCreation Screen</Text>
           </Pressable>
         </View>
       )}

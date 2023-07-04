@@ -13,7 +13,7 @@ export default function SeriesNamesCreationScreen({ navigation }) {
     const [numberOfSeries, setnumberOfSeries] = useState(0);
     const [seriesNames, setSeriesNames] = useState([]);
 
-    const createSeries = () => {
+    const defineListOfNames = () => {
         const updatedSeriesNames = Array.from({ length: numberOfSeries }, () => '');
         setSeriesNames(updatedSeriesNames);
     }
@@ -35,7 +35,7 @@ export default function SeriesNamesCreationScreen({ navigation }) {
         );
     }
 
-    const CreateSessions = async () => {
+    const createSeries = async () => {
         try {
             const jsonValue = JSON.stringify(seriesNames);
             await AsyncStorage.setItem(`${login}`, jsonValue);
@@ -60,11 +60,11 @@ export default function SeriesNamesCreationScreen({ navigation }) {
                 keyboardType="numeric"
                 maxLength={1}
             />
-            <Pressable onPress={createSeries}>
-                <Text>Create series names</Text>
+            <Pressable onPress={defineListOfNames}>
+                <Text>Create name inputs</Text>
             </Pressable>
-            <Pressable onPress={CreateSessions}>
-                <Text>Create sessions</Text>
+            <Pressable onPress={createSeries}>
+                <Text>Create series</Text>
             </Pressable>
             <FlatList data={seriesNames} renderItem={renderExercise} />
         </View>
