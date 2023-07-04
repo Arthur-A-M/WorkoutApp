@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { getStringData } from '../../../Functions';
 
 import { styles } from './styles';
-import { login } from '../Workout/data';
 
-export default function SeriesSelectionCreation({ navigation }) {
+export default function SeriesSelectionCreation({ navigation, route }) {
   const [seriesNames, setSeriesNames] = useState([]);
+
+  const { login } = route.params;
 
   useEffect(() => {
     fetchSeriesNames();

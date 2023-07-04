@@ -10,14 +10,16 @@ export default function WorkoutSeriesScreen({ navigation, route }) {
 
     const { series } = route.params;
 
-    useEffect(() => {
-        navigation.navigate('Workout', { exercises });
-    }, [exercises]);
-
     const fetchExercises = async (serie) => {
         const newExercises = await getObjectData(serie);
         setExercises(newExercises);
     }
+
+    useEffect(() => {
+        if (exercises.length > 0) {
+            navigation.navigate('Workout', { exercises: exercises });
+        }
+    }, [exercises, navigation]);
 
     return (
         <View style={styles.container}>

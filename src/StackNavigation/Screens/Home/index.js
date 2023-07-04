@@ -1,20 +1,20 @@
 import { Text, View, Pressable, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { storeData, getExerciseArray, getStringData } from '../../../Functions';
+import { getStringData } from '../../../Functions';
 
 import { styles } from './styles';
-import { login } from '../Workout/data';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
   const [localDataChecked, setLocalDataChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [series, setSeries] = useState([]);
 
+  const { login } = route.params;
+
   useEffect(() => {
     async function fetchData() {
-      const response = await getStringData(`${login}`);
+      const response = await getStringData(login);
       if (response) {
         setLocalDataChecked(true);
         setSeries(JSON.parse(response));
@@ -24,10 +24,18 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (series) {
+    if (series.length > 0) {
       setIsLoading(false);
     }
-  },[series]);
+  }, [series]);
+
+  const goToWorkoutScreen = () => {
+    if (localDataChecked) {
+      navigation.navigate('WorkoutSeries', { series: series });
+    } else {
+      alert('No session found!');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -35,11 +43,7 @@ export default function HomeScreen({ navigation }) {
         <ActivityIndicator />
       ) : (
         <View>
-          <Pressable
-            onPress={localDataChecked ? 
-              () => navigation.navigate('WorkoutSeries', { series: series }) 
-              : alert('No session found!')}//Buggued alerts even when there os a session
-          >
+          <Pressable onPress={goToWorkoutScreen}>
             <Text>Go to Workout Screen</Text>
           </Pressable>
           <Pressable onPress={() => navigation.navigate('HIIT')}>
@@ -48,7 +52,7 @@ export default function HomeScreen({ navigation }) {
           <Pressable onPress={() => navigation.navigate('SeriesNamesCreation')}>
             <Text>Go to SeriesNamesCreation Screen</Text>
           </Pressable>
-          <Pressable onPress={() => navigation.navigate('SeriesExercisesCreation')}>
+          <Pressable onPress={() => navigation.navigate('SeriesExercisesCreation', { login: login })}>
             <Text>Go to SeriesExercisesCreation Screen</Text>
           </Pressable>
         </View>

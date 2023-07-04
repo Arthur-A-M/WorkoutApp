@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import LoginScreen from '../Screens/Login';
 import HomeScreen from '../Screens/Home';
 import WorkoutScreen from '../Screens/Workout';
 import HIITScreen from '../Screens/HIIT';
@@ -14,6 +15,7 @@ const Stack = createStackNavigator();
 
 export default function Navigation() {
     const screens = [
+        { name: "Login", component: LoginScreen },
         { name: "Home", component: HomeScreen },
         { name: "Workout", component: WorkoutScreen },
         { name: "WorkoutSeries", component: WorkoutSeriesScreen },

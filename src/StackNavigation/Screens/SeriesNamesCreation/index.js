@@ -2,8 +2,6 @@ import { Text, View, Pressable, FlatList, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { login } from '../Workout/data';
-
 import { styles } from './styles';
 
 export default function SeriesNamesCreationScreen({ navigation }) {
