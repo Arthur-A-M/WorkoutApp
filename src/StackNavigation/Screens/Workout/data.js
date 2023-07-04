@@ -149,3 +149,5 @@ export const sessions = [
   ];
 
 export const series = ['Serie A', 'Serie B', 'Serie C'];
+
+export const login = 'logintest2';

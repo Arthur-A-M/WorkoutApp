@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Screens/Home';
 import WorkoutScreen from '../Screens/Workout';
 import HIITScreen from '../Screens/HIIT';
+import SeriesNamesCreationScreen from '../Screens/SeriesNamesCreation';
+import SeriesExercisesCreationScreen from '../Screens/SeriesExercisesCreation';
 
 
 const Stack = createStackNavigator();
@@ -12,7 +14,9 @@ export default function Navigation() {
     const screens = [
         { name: "Home", component: HomeScreen },
         { name: "Workout", component: WorkoutScreen },
-        { name: "HIIT", component: HIITScreen }
+        { name: "HIIT", component: HIITScreen },
+        { name: "SeriesNamesCreation", component: SeriesNamesCreationScreen },
+        { name: "SeriesExercisesCreation", component: SeriesExercisesCreationScreen }
     ];
 
     return (
