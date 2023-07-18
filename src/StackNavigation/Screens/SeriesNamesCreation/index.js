@@ -4,9 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles';
 
-export default function SeriesNamesCreationScreen({ navigation }) {
+export default function SeriesNamesCreationScreen({ navigation, route }) {
   const [numberOfSeries, setNumberOfSeries] = useState(0);
   const [seriesNames, setSeriesNames] = useState([]);
+
+  const { login } = route.params; // is not being received
 
   const defineListOfNames = () => {
     const updatedSeriesNames = Array.from({ length: numberOfSeries }, () => '');
@@ -56,7 +58,7 @@ export default function SeriesNamesCreationScreen({ navigation }) {
         <Text>Create name inputs</Text>
       </Pressable>
       <Pressable onPress={createSeries}>
-        <Text>Create series</Text>
+        <Text>Create series</Text>{/*breakes the app if you click on it before creating the series inputs*/}
       </Pressable>
       <FlatList data={seriesNames} renderItem={renderExercise} />
     </View>

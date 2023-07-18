@@ -2,9 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
   export const getStringData = async (key) => {
     try {
+      console.log('the key is:', key);
       const value = await AsyncStorage.getItem(`${key}`);
+      console.log('the value is:', value);
       if (value !== null) {
         return value;
+      } else if (value === null || value === []) {
+        console.log('No session found!');
+        return null;
       }
     } catch (e) {
       console.log(e);
