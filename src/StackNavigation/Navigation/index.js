@@ -21,7 +21,7 @@ export default function Navigation() {
         { name: "WorkoutSeries", component: WorkoutSeriesScreen },
         { name: "HIIT", component: HIITScreen },
         { name: "SeriesNamesCreation", component: SeriesNamesCreationScreen },
-        { name: "SeriesExercisesCreation", component: SeriesSelectionCreation },
+        { name: "SeriesSelectionCreation", component: SeriesSelectionCreation },
         { name: "ExercisesCreation", component: ExercisesCreationScreen },
         
     ];

@@ -10,29 +10,28 @@ export default function HomeScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [series, setSeries] = useState([]);
 
-  const { login } = route.params;// a variavel agora irá se chamar email
+  const { email } = route.params;
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getStringData(login);
+      const response = await getStringData(email);
       if (response) {
         setLocalDataChecked(true);
-        setIsLoading(false); // temporario
         setSeries(JSON.parse(response));
         console.log('response is:', response);
       } else if (response === null || response === []) {
-        setLocalDataChecked(true);
-        setIsLoading(false); //temporario
         alert('No session found!');
       }
     }
     fetchData();
+    console.log('series is:', series);
   }, []);
 
   useEffect(() => {
-    if (series.length > 0) {
-      setIsLoading(false);
-    }
+    console.log('series is:', series);
+    console.log('localDataChecked is:', localDataChecked);
+    setIsLoading(false);
+    console.log('series is array:', Array.isArray(series));
   }, [series]);
 
   const goToWorkoutScreen = () => {
@@ -43,27 +42,40 @@ export default function HomeScreen({ navigation, route }) {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      {isLoading ? (
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
         <ActivityIndicator />
-      ) : (
-        <View>
-          <Pressable onPress={goToWorkoutScreen}>
-            <Text>Go to Workout Screen</Text>{/**will break the app if accessed before series is defined */}
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate('HIIT')}>
-            <Text>Go to HIIT Screen</Text>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { login: login })}>
-            <Text>Go to SeriesNamesCreation Screen</Text>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate('SeriesExercisesCreation', { login: login })}>
-            <Text>Go to SeriesExercisesCreation Screen</Text>{/**will break the app if accessed before series names is defined */}
-          </Pressable>
-        </View>
-      )}
-    </View>
-  );
+      </View>
+    );
+  } else if (!isLoading && !localDataChecked) {
+    return (
+      <View style={styles.container}>
+        <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
+          <Text>Go to SeriesNamesCreation Screen</Text>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('SeriesSelectionCreation', { email: email })}>
+          <Text>Go to SeriesSelectionCreation Screen</Text>
+        </Pressable>
+      </View>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <Pressable onPress={goToWorkoutScreen}>
+          <Text>Go to Workout Screen</Text>{/**will break the app if accessed before series is defined */}
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('HIIT')}>
+          <Text>Go to HIIT Screen</Text>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
+          <Text>Go to SeriesNamesCreation Screen</Text>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate('SeriesSelectionCreation', { series: series })}>
+          <Text>Go to SeriesSelectionCreation Screen</Text>
+        </Pressable>
+      </View>
+    );
+  }
 }
 

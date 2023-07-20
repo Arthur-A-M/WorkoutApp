@@ -8,16 +8,21 @@ import { styles } from './styles';
 export default function ExercisesCreationScreen({ route }) {
     const [numberOfExercises, setNumberOfExercises] = useState(0);
     const [exercises, setExercises] = useState([]);
-    const { serieName } = route.params;
+
+    const { serie } = route.params;
   
     useEffect(() => {
-      console.log('item is:', serieName);
+      console.log('item is:', serie);
       initialRender();
     }, []);
   
     const initialRender = async () => {
-        const value = await getStringData(serieName);
-        setExercises(JSON.parse(value));
+        const value = await getStringData(serie);
+        if (value) {
+          setExercises(JSON.parse(value));
+        } else {
+          alert('No session found!');
+        }
     }
 
     useEffect(() => {
@@ -39,6 +44,7 @@ const renderExercise = ({ item, index }) => {
           key={`${index} ${key}`}
           value={String(item[key])} // Convert the value to a string
           onChangeText={(value) => handleInputChange(index, key, value)}
+          placeholder={key}
         />
       ))}
     </View>
@@ -57,20 +63,20 @@ const renderExercise = ({ item, index }) => {
 
   
 const handleFooterPress = async () => {
-  await storeObjectData(serieName, exercises);
-  const value = await getStringData(serieName);
+  await storeObjectData(serie, exercises);
+  const value = await getStringData(serie);
   console.log('the value is:', value);
 };
   
     return (
       <View style={styles.container}>
-        <Text style={{ backgroundColor: 'red' }}>{serieName}</Text>
+        <Text style={{ backgroundColor: 'red' }}>{serie}</Text>
         <Pressable onPress={defineListOfexercises}>
           <Text>Define exercises</Text>
           <TextInput
             style={styles.TextInput}
             value={numberOfExercises}
-            onChangeText={(value) => setNumberOfExercises(parseInt(value))}
+            onChangeText={(value) => setNumberOfExercises(parseInt(value))}// need verification the same used before to test if it is integer
             keyboardType="numeric"
             maxLength={2}
             placeholder={`Number of exercises is, ${exercises.length}`}
