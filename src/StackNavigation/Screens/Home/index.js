@@ -10,7 +10,7 @@ export default function HomeScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [series, setSeries] = useState([]);
 
-  const { login } = route.params;
+  const { login } = route.params;// a variavel agora irá se chamar email
 
   useEffect(() => {
     async function fetchData() {
