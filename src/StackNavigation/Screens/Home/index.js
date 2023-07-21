@@ -54,26 +54,63 @@ export default function HomeScreen({ navigation, route }) {
         <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
           <Text>Go to SeriesNamesCreation Screen</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('SeriesSelectionCreation', { email: email })}>
-          <Text>Go to SeriesSelectionCreation Screen</Text>
-        </Pressable>
       </View>
     )
   } else {
     return (
       <View style={styles.container}>
-        <Pressable onPress={goToWorkoutScreen}>
-          <Text>Go to Workout Screen</Text>{/**will break the app if accessed before series is defined */}
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate('HIIT')}>
-          <Text>Go to HIIT Screen</Text>
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
-          <Text>Go to SeriesNamesCreation Screen</Text>
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate('SeriesSelectionCreation', { series: series })}>
-          <Text>Go to SeriesSelectionCreation Screen</Text>
-        </Pressable>
+        <View style={styles.viewStartingExercises}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.pressableStartingExercises,
+              pressed && {
+                opacity: 0.7,
+                width: '37%',
+                height: 37,
+              },
+            ]}
+            onPress={goToWorkoutScreen}>
+            <Text style={styles.textStartingExercises}>GYM{"\n"}Resistence Trainning</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.pressableStartingExercises,
+              pressed && {
+                opacity: 0.7,
+                width: '37%',
+                height: 37,
+              },
+            ]}
+            onPress={() => navigation.navigate('HIIT')}>
+            <Text style={styles.textStartingExercises}>HIIT</Text>
+          </Pressable>
+        </View>
+        <View style={styles.viewCreatingExercises}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.pressableCreatingExercises,
+              pressed && {
+                opacity: 0.7,
+                width: '37%',
+                height: 37,
+              },
+            ]}
+            onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
+            <Text style={styles.textExercises}>Create New Series</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.pressableCreatingExercises,
+              pressed && {
+                opacity: 0.7,
+                width: '37%',
+                height: 37,
+              },
+            ]}
+            onPress={() => navigation.navigate('SeriesSelectionCreation', { series: series })}>
+            <Text style={styles.textExercises}>Edit Exercises</Text>
+          </Pressable>
+        </View>
       </View>
     );
   }
