@@ -45,3 +45,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
     return formattedTime;
   }
+
+  export const checkInteger = (value) => {
+    if (isNaN(parseInt(value))) {
+      return false;
+    } else {
+      return true;
+    }
+  };
