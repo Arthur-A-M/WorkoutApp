@@ -21,9 +21,15 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingBottom: 20
   },
+  viewStartingExercise: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
   pressableStartingExercises: {
     width: '90%',
-    height: 120,
+    height: 110,
     marginVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -39,6 +45,11 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     borderColor: 'gray',
     borderWidth: 1,
+  },
+  imageStartingExercises: {
+  width: '30%',  
+  height: 90,
+  borderRadius: 5,
   },
   textExercises: {
     fontSize: 15,

@@ -1,5 +1,6 @@
-import { Text, View, Pressable, ActivityIndicator } from 'react-native';
+import { Text, View, Pressable, ActivityIndicator, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 import { getStringData } from '../../../Functions';
 
@@ -55,7 +56,7 @@ export default function HomeScreen({ navigation, route }) {
           <Text>Go to SeriesNamesCreation Screen</Text>
         </Pressable>
       </View>
-    )
+    );
   } else {
     return (
       <View style={styles.container}>
@@ -65,24 +66,38 @@ export default function HomeScreen({ navigation, route }) {
               styles.pressableStartingExercises,
               pressed && {
                 opacity: 0.7,
-                width: '37%',
-                height: 37,
+                width: '85%',
+                height: 100,
               },
             ]}
             onPress={goToWorkoutScreen}>
-            <Text style={styles.textStartingExercises}>GYM{"\n"}Resistence Trainning</Text>
+            <View style={styles.viewStartingExercise}>
+              <Image
+                source={require('../../../../assets/ResistenceTrainning.jpg')}
+                style={styles.imageStartingExercises}
+              />
+              <Text style={styles.textStartingExercises}>GYM{"\n"}Resistence Trainning</Text>
+              <AntDesign name="rightcircle" size={45} color="#e0fe10" />
+            </View>
           </Pressable>
           <Pressable
             style={({ pressed }) => [
               styles.pressableStartingExercises,
               pressed && {
                 opacity: 0.7,
-                width: '37%',
-                height: 37,
+                width: '85%',
+                height: 100,
               },
             ]}
             onPress={() => navigation.navigate('HIIT')}>
-            <Text style={styles.textStartingExercises}>HIIT</Text>
+            <View style={styles.viewStartingExercise}>
+              <Image
+                source={require('../../../../assets/HIIT.jpg')}
+                style={styles.imageStartingExercises}
+              />
+              <Text style={styles.textStartingExercises}>HIIT</Text>
+              <AntDesign name="rightcircle" size={45} color="#e0fe10" />
+            </View>
           </Pressable>
         </View>
         <View style={styles.viewCreatingExercises}>
