@@ -1,15 +1,10 @@
 import { Text, Pressable, View } from 'react-native';
-import React, { useEffect} from 'react';
+import React from 'react';
 
 import { styles } from './styles';
 
 export default function SeriesSelectionCreation({ navigation, route }) {
   const { series } = route.params;
-
-  useEffect(() => {
-    console.log('series is:', series);
-    console.log('series is array:', Array.isArray(series));
-  }, []);
 
   const navigateToExercisesCreation = (serie) => {
     navigation.navigate('ExercisesCreation', { serie: serie });

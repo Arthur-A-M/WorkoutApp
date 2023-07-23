@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors } from '../../../Styles/Colors';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c2227',
+    backgroundColor: Colors.coreColors.secundary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -27,6 +29,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
   },
+  pressableStartingClicked: {
+    opacity: 0.7,
+    width: '85%',
+    height: 100,
+  },
   pressableStartingExercises: {
     width: '90%',
     height: 110,
@@ -34,7 +41,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
-    backgroundColor: '#2a2f37',
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
+  },
+  pressableCreatingClicked: {
+    opacity: 0.7,
+    width: '37%',
+    height: 37, 
   },
   pressableCreatingExercises: {
     width: '40%',
@@ -43,7 +55,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,
-    borderColor: 'gray',
+    borderColor: Colors.genericColors.grayish,
     borderWidth: 1,
   },
   imageStartingExercises: {
@@ -54,12 +66,12 @@ export const styles = StyleSheet.create({
   textExercises: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.genericColors.clear,
   },
   textStartingExercises: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.genericColors.clear,
     textAlign: 'center',
   }
 });

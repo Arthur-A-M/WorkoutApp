@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
 import { storeObjectData, getObjectData } from '../../../Functions';
+import { Colors } from '../../../Styles/Colors'
 
 import { styles } from './styles';
 
@@ -41,12 +42,12 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.inputsView}>
         <View style={styles.inputView}>
-          <Feather name="mail" size={24} color="white" />
+          <Feather name="mail" size={24} color={Colors.genericColors.clear} />
           <TextInput
             style={styles.textInput}
             value={email}
             onChangeText={setEmail}
-            placeholderTextColor="white"
+            placeholderTextColor={Colors.genericColors.clear}
             placeholder="Email"
             autoCapitalize="none"
             autoCompleteType="email"
@@ -54,12 +55,12 @@ export default function LoginScreen({ navigation }) {
           />
         </View>
         <View style={styles.inputView}>
-          <AntDesign name="lock" size={24} color="white" />
+          <AntDesign name="lock" size={24} color={Colors.genericColors.clear} />
           <TextInput
             style={styles.textInput}
             value={password}
             onChangeText={setPassword}
-            placeholderTextColor="white"
+            placeholderTextColor={Colors.genericColors.clear}
             placeholder="Password"
             secureTextEntry={true}
             autoCompleteType="password"
@@ -70,7 +71,7 @@ export default function LoginScreen({ navigation }) {
           <BouncyCheckbox
             isChecked={checkboxState}
             onPress={() => setCheckboxState(!checkboxState)}
-            fillColor="#e0fe10"
+            fillColor={Colors.coreColors.main}
             disableBuiltInState={true}
           />
           <Text style={styles.checkboxText}>Remember me</Text>
@@ -83,7 +84,7 @@ export default function LoginScreen({ navigation }) {
             styles.pressableLogin,
             pressed && {
               opacity: 0.7,
-              width: '65%',
+              width: '65%', // Dynamic styles isn't working
               height: 70,
             },
           ]}
@@ -96,7 +97,7 @@ export default function LoginScreen({ navigation }) {
             styles.pressableSignUp,
             pressed && {
               opacity: 0.7,
-              width: '45%',
+              width: '45%', // Dynamic styles isn't working
               height: 45,
             },
           ]}

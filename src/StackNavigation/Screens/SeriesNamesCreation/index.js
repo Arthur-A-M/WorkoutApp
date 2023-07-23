@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { SelectList } from 'react-native-dropdown-select-list'
 
 import { storeObjectData, checkInteger } from '../../../Functions';
+import { Colors } from '../../../Styles/Colors';
 
 import { styles } from './styles';
 
@@ -39,7 +40,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
       onChangeText={(value) => handleInputChange(index, value)}
       placeholder="Serie name"
       maxLength={20}
-      placeholderTextColor={'white'}
+      placeholderTextColor={Colors.genericColors.clear}
     />
   ), [handleInputChange]);
 
@@ -64,21 +65,12 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
   }, [email, seriesNames, navigation]);
 
   useEffect(() => {
-    console.log(seriesNames);
-  }, [seriesNames]);
-
-  useEffect(() => {
-    console.log('email is:', email);
-  }, []);
-
-  useEffect(() => {
     return () => {
       setNumberOfSeries(0);
     };
   }, []);
 
   if (namesConfirmed) {
-    console.log('numberOfSeries is:', numberOfSeries);
     return (
       <View style={styles.container}>
         <FlatList
@@ -95,14 +87,13 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
       </View>
     );
   } else {
-    console.log('numberOfSeries is:', numberOfSeries);
     return (
       <View style={[styles.container, { justifyContent: 'center' }]}>
         <SelectList
-          boxStyles={{ backgroundColor: 'gray' }}
-          inputStyles={{ color: 'white' }}
+          boxStyles={{ backgroundColor: Colors.genericColors.grayish }}
+          inputStyles={{ color: Colors.genericColors.clear }}
           dropdownStyles={{ alignItems: 'center' }}
-          dropdownTextStyles={{ color: 'white' }}
+          dropdownTextStyles={{ color: Colors.genericColors.clear }}
           setSelected={(val) => setNumberOfSeries(val)}
           maxHeight={300}
           data={data}

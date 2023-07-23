@@ -1,8 +1,8 @@
-import { Text, View, Pressable, ActivityIndicator, Image } from 'react-native';
+import { Text, View, Pressable, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { AntDesign } from '@expo/vector-icons';
 
 import { getStringData } from '../../../Functions';
+import { pressableStarting } from '../../../Components';
 
 import { styles } from './styles';
 
@@ -19,25 +19,17 @@ export default function HomeScreen({ navigation, route }) {
       if (response) {
         setLocalDataChecked(true);
         setSeries(JSON.parse(response));
-        console.log('response is:', response);
-      } else if (response === null || response === []) {
+      } else {
         alert('No session found!');
       }
+      setIsLoading(false);
     }
     fetchData();
-    console.log('series is:', series);
   }, []);
-
-  useEffect(() => {
-    console.log('series is:', series);
-    console.log('localDataChecked is:', localDataChecked);
-    setIsLoading(false);
-    console.log('series is array:', Array.isArray(series));
-  }, [series]);
 
   const goToWorkoutScreen = () => {
     if (localDataChecked) {
-      navigation.navigate('WorkoutSeries', { series: series });
+      navigation.navigate('WorkoutSeries', { series });
     } else {
       alert('No session found!');
     }
@@ -49,94 +41,56 @@ export default function HomeScreen({ navigation, route }) {
         <ActivityIndicator />
       </View>
     );
-  } else if (!isLoading && !localDataChecked) {
+  }
+
+  if (!localDataChecked) {
     return (
       <View style={styles.container}>
         <Pressable
           style={({ pressed }) => [
             styles.pressableCreatingExercises,
-            pressed && {
-              opacity: 0.7,
-              width: '37%',
-              height: 37,
-            },
+            pressed && styles.pressableCreatingClicked,
           ]}
-          onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
+          onPress={() => navigation.navigate('SeriesNamesCreation', { email })}>
           <Text style={styles.textExercises}>Create New Series</Text>
         </Pressable>
       </View>
     );
-  } else {
-    return (
-      <View style={styles.container}>
-        <View style={styles.viewStartingExercises}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.pressableStartingExercises,
-              pressed && {
-                opacity: 0.7,
-                width: '85%',
-                height: 100,
-              },
-            ]}
-            onPress={goToWorkoutScreen}>
-            <View style={styles.viewStartingExercise}>
-              <Image
-                source={require('../../../../assets/ResistenceTrainning.jpg')}
-                style={styles.imageStartingExercises}
-              />
-              <Text style={styles.textStartingExercises}>GYM{"\n"}Resistence Trainning</Text>
-              <AntDesign name="rightcircle" size={45} color="#e0fe10" />
-            </View>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.pressableStartingExercises,
-              pressed && {
-                opacity: 0.7,
-                width: '85%',
-                height: 100,
-              },
-            ]}
-            onPress={() => navigation.navigate('HIIT')}>
-            <View style={styles.viewStartingExercise}>
-              <Image
-                source={require('../../../../assets/HIIT.jpg')}
-                style={styles.imageStartingExercises}
-              />
-              <Text style={styles.textStartingExercises}>HIIT</Text>
-              <AntDesign name="rightcircle" size={45} color="#e0fe10" />
-            </View>
-          </Pressable>
-        </View>
-        <View style={styles.viewCreatingExercises}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.pressableCreatingExercises,
-              pressed && {
-                opacity: 0.7,
-                width: '37%',
-                height: 37,
-              },
-            ]}
-            onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
-            <Text style={styles.textExercises}>Create New Series</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.pressableCreatingExercises,
-              pressed && {
-                opacity: 0.7,
-                width: '37%',
-                height: 37,
-              },
-            ]}
-            onPress={() => navigation.navigate('SeriesSelectionCreation', { series: series })}>
-            <Text style={styles.textExercises}>Edit Exercises</Text>
-          </Pressable>
-        </View>
-      </View>
-    );
   }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.viewStartingExercises}>
+        <pressableStarting
+          imgaString={'ResistenceTrainning.jpg'}
+          textString={'GYM\nResistence Trainning'}
+          onPress={goToWorkoutScreen}
+        />
+        <pressableStarting
+          imgaString={'HIIT.jpg'}
+          textString={'HIIT'}
+          onPress={() => navigation.navigate('HIIT')}
+        />
+      </View>
+      <View style={styles.viewCreatingExercises}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.pressableCreatingExercises,
+            pressed && styles.pressableCreatingClicked,
+          ]}
+          onPress={() => navigation.navigate('SeriesNamesCreation', { email })}>
+          <Text style={styles.textExercises}>Create New Series</Text>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.pressableCreatingExercises,
+            pressed && styles.pressableCreatingClicked,
+          ]}
+          onPress={() => navigation.navigate('SeriesSelectionCreation', { series })}>
+          <Text style={styles.textExercises}>Edit Exercises</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
 }
 

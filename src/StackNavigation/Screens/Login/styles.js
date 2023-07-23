@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors } from '../../../Styles/Colors';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c2227',
+    backgroundColor: Colors.coreColors.secundary,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -19,10 +21,10 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 360,
     paddingHorizontal: 15,
-    borderColor: 'gray',
+    borderColor: Colors.genericColors.grayish,
     borderWidth: 1,
     borderRadius: 25,
-    backgroundColor: '#2a2f37',
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     marginVertical: 6
   },
   pressablesView: {
@@ -32,10 +34,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   textInput: {
-    color: 'white',
+    color: Colors.genericColors.clear,
     width: '90%',
     fontSize: 18,
     marginLeft: 5
+  },
+  pressableClickedLogin:{
+    opacity: 0.7,
+    width: '65%',
+    height: 70,
   },
   pressableLogin: {
     width: '70%',
@@ -44,9 +51,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 40,
-    borderColor: 'black',
+    borderColor: Colors.genericColors.dark,
     borderWidth: 1,
-    backgroundColor: '#e0fe10',
+    backgroundColor: Colors.coreColors.main,
+  },
+  pressableSignUpClicked: {
+    opacity: 0.7,
+    width: '45%',
+    height: 45,
   },
   pressableSignUp: {
     width: '50%',
@@ -55,9 +67,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,
-    borderColor: 'gray',
+    borderColor: Colors.genericColors.grayish,
     borderWidth: 1,
-    backgroundColor: '#2a2f37',
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
   },
   checkboxView: {
     flexDirection: 'row',
@@ -65,7 +77,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 5
   },
   checkboxText: {
-    color: 'white',
+    color: Colors.genericColors.clear,
     fontSize: 18
   },
   textLogin: {
@@ -75,6 +87,6 @@ export const styles = StyleSheet.create({
   textSignUp: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.genericColors.clear,
   }
 });

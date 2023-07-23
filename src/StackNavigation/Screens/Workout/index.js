@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { ReturnTime } from '../../../Functions';
+import { Colors } from '../../../Styles/Colors';
 
 import { styles } from './styles';
 
@@ -67,9 +68,9 @@ export default function WorkoutScreen({ route }) {
 
   const renderTimerIcon = () => {
     if (timerRunning) {
-      return <Entypo name="controller-stop" size={30} color="#e0fe10" />;
+      return <Entypo name="controller-stop" size={30} color={Colors.coreColors.main} />;
     } else {
-      return <AntDesign name="play" size={30} color="#e0fe10" />;
+      return <AntDesign name="play" size={30} color={Colors.coreColors.main} />;
     }
   };
 

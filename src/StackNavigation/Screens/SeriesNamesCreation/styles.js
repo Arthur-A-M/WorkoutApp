@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors } from '../../../Styles/Colors';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c2227',
+    backgroundColor: Colors.coreColors.secundary,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -16,16 +18,16 @@ export const styles = StyleSheet.create({
     paddingTop: 20
   },
   textInput: {
-    color: 'white',
+    color: Colors.genericColors.clear,
     width: 300,
     fontSize: 22,
     marginLeft: 5,
     height: 60,
     paddingHorizontal: 15,
-    borderColor: 'gray',
+    borderColor: Colors.genericColors.grayish,
     borderWidth: 1,
     borderRadius: 25,
-    backgroundColor: '#2a2f37',
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     marginVertical: 15
   },
   pressable: {
@@ -35,9 +37,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 40,
-    borderColor: 'black',
+    borderColor: Colors.genericColors.dark,
     borderWidth: 1,
-    backgroundColor: '#e0fe10',
+    backgroundColor: Colors.coreColors.main,
   },
   textpressable: {
     fontSize: 20,

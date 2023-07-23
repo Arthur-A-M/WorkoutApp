@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { Colors } from '../../../Styles/Colors';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c2227',
+    backgroundColor: Colors.coreColors.secundary,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -14,12 +16,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 30,
-    backgroundColor: '#2a2f37',
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
   },
   text: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.genericColors.clear,
     textAlign: 'center',
   }
 });

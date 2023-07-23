@@ -1,9 +1,11 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+import { Colors } from '../../../Styles/Colors';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c2227',
+    backgroundColor: Colors.coreColors.secundary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -16,7 +18,7 @@ export const styles = StyleSheet.create({
   viewDataType: {
     flex: 1,
     justifyContent: 'space-around',
-    borderColor: 'white',
+    borderColor: Colors.genericColors.clear,
     borderTopWidth: 1,
   },
   pressableExercises: {
@@ -26,7 +28,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: 10,
-    borderColor: 'white',
+    borderColor: Colors.genericColors.clear,
     borderWidth: 1,
     marginHorizontal: 25,
   },
@@ -34,7 +36,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white',
+    color: Colors.genericColors.clear,
   },
   pressableTimer: {
     flexDirection: 'row',
@@ -43,7 +45,7 @@ export const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 50,
     borderRadius: 5,
-    borderColor: 'white',
+    borderColor: Colors.genericColors.clear,
     borderWidth: 1,
     marginBottom: 15,
     paddingHorizontal: 10,

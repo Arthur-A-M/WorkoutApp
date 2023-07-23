@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { SelectList } from 'react-native-dropdown-select-list'
 
 import { storeObjectData, getStringData } from '../../../Functions';
+import { Colors } from '../../../Styles/Colors';
 
 import { styles } from './styles';
 
@@ -16,7 +17,6 @@ export default function ExercisesCreationScreen({ route }) {
   const { serie } = route.params;
 
   useEffect(() => {
-    console.log('item is:', serie);
     initialRender();
   }, []);
 
@@ -28,10 +28,6 @@ export default function ExercisesCreationScreen({ route }) {
       alert('No session found!');
     }
   }
-
-  useEffect(() => {
-    console.log('exercises are:', exercises);
-  }, [exercises]);
 
   const handleInputChange = (index, key, value) => {
     const updatedExercises = [...exercises];
@@ -57,7 +53,7 @@ export default function ExercisesCreationScreen({ route }) {
             value={String(item[key])}
             onChangeText={(value) => handleInputChange(index, key, value)}
             placeholder={key}
-            placeholderTextColor={'white'}
+            placeholderTextColor={Colors.genericColors.clear}
           />
         ))}
       </View>
@@ -84,7 +80,6 @@ export default function ExercisesCreationScreen({ route }) {
 
     await storeObjectData(serie, exercises);
     const value = await getStringData(serie);
-    console.log('the value is:', value);
     alert('Exercises created!');
   };
 
@@ -114,10 +109,10 @@ export default function ExercisesCreationScreen({ route }) {
       <View style={styles.container}>
         <Text style={styles.text}>{serie}</Text>
         <SelectList
-          boxStyles={{ backgroundColor: 'gray' }}
-          inputStyles={{ color: 'white' }}
+          boxStyles={{ backgroundColor: Colors.genericColors.grayish }}
+          inputStyles={{ color: Colors.genericColors.clear }}
           dropdownStyles={{ alignItems: 'center' }}
-          dropdownTextStyles={{ color: 'white' }}
+          dropdownTextStyles={{ color: Colors.genericColors.clear }}
           setSelected={(val) => setNumberOfExercises(val)}
           maxHeight={450}
           data={data}
