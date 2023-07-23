@@ -3,23 +3,23 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1c2227',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  pressableSeries: {
+  pressable: {
     flex: 1,
     width: '90%',
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'azure',
-    justifyContent: 'center'
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 30,
+    backgroundColor: '#2a2f37',
   },
   text: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
+    color: 'white',
     textAlign: 'center',
-  },
+  }
 });

@@ -52,8 +52,17 @@ export default function HomeScreen({ navigation, route }) {
   } else if (!isLoading && !localDataChecked) {
     return (
       <View style={styles.container}>
-        <Pressable onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
-          <Text>Go to SeriesNamesCreation Screen</Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.pressableCreatingExercises,
+            pressed && {
+              opacity: 0.7,
+              width: '37%',
+              height: 37,
+            },
+          ]}
+          onPress={() => navigation.navigate('SeriesNamesCreation', { email: email })}>
+          <Text style={styles.textExercises}>Create New Series</Text>
         </Pressable>
       </View>
     );

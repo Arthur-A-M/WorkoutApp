@@ -17,11 +17,11 @@ export default function WorkoutSeriesScreen({ navigation, route }) {
         <View style={styles.container}>
             {series.map((serie, index) => (
                 <Pressable
-                    style={styles.pressableSeries}
+                    style={styles.pressable}
                     key={index}
                     onPress={() => fetchExercises(serie)}
                 >
-                    <Text style={[styles.text, { fontSize: 35 }]}>{serie}</Text>
+                    <Text style={styles.text}>{serie}</Text>
                 </Pressable>
             ))}
         </View>

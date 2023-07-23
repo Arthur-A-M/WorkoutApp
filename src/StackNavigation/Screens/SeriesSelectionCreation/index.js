@@ -1,10 +1,9 @@
-import { Text, Pressable } from 'react-native';
+import { Text, Pressable, View } from 'react-native';
 import React, { useEffect} from 'react';
 
 import { styles } from './styles';
 
 export default function SeriesSelectionCreation({ navigation, route }) {
-  
   const { series } = route.params;
 
   useEffect(() => {
@@ -13,16 +12,20 @@ export default function SeriesSelectionCreation({ navigation, route }) {
   }, []);
 
   const navigateToExercisesCreation = (serie) => {
-  navigation.navigate('ExercisesCreation', { serie: serie });
+    navigation.navigate('ExercisesCreation', { serie: serie });
   };
 
-    return series.map((item) => (
-      <Pressable
-        key={item}
-        style={{ backgroundColor: 'red' }}
-        onPress={() => navigateToExercisesCreation(item)}
-      >
-        <Text>{item}</Text>
-      </Pressable>
-    ));
+  return (
+    <View style={styles.container}>
+      {series.map((item) => (
+        <Pressable
+          key={item}
+          style={styles.pressable}
+          onPress={() => navigateToExercisesCreation(item)}
+        >
+          <Text style={styles.text}>{item}</Text>
+        </Pressable>
+      ))}
+    </View>
+  );
 }

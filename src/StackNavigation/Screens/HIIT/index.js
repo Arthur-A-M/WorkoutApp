@@ -6,7 +6,7 @@ import { styles } from './styles';
 export default function HIITScreen() {
   return (
     <View style={styles.container}>
-      {/* Add HIIT screen content here */}
+      <Text>Not yet implemented</Text>
     </View>
   )
 }

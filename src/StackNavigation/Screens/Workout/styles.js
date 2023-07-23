@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1c2227',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
   viewDataType: {
     flex: 1,
     justifyContent: 'space-around',
-    borderColor: 'black',
+    borderColor: 'white',
     borderTopWidth: 1,
   },
   pressableExercises: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: 10,
-    borderColor: 'black',
+    borderColor: 'white',
     borderWidth: 1,
     marginHorizontal: 25,
   },
@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'white',
   },
   pressableTimer: {
     flexDirection: 'row',
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.6,
     height: 50,
     borderRadius: 5,
-    borderColor: 'black',
+    borderColor: 'white',
     borderWidth: 1,
     marginBottom: 15,
     paddingHorizontal: 10,

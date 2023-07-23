@@ -12,7 +12,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
   const [namesConfirmed, setNamesConfirmed] = useState(false);
   const [seriesNames, setSeriesNames] = useState([]);
 
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const data = [1, 2, 3, 4, 5];
 
   const { email } = route.params;
 

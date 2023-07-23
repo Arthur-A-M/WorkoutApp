@@ -67,9 +67,9 @@ export default function WorkoutScreen({ route }) {
 
   const renderTimerIcon = () => {
     if (timerRunning) {
-      return <Entypo name="controller-stop" size={30} color="black" />;
+      return <Entypo name="controller-stop" size={30} color="#e0fe10" />;
     } else {
-      return <AntDesign name="play" size={30} color="black" />;
+      return <AntDesign name="play" size={30} color="#e0fe10" />;
     }
   };
 
