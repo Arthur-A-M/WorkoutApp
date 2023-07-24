@@ -15,5 +15,6 @@ export const Colors = {
         clear: 'white',
         grayish: 'gray',
         dark: 'black',
+        calling: 'red',
     }
 }

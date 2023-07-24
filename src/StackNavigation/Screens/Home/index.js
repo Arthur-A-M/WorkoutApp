@@ -21,8 +21,6 @@ export default function HomeScreen({ navigation, route }) {
       if (response) {
         setLocalDataChecked(true);
         setSeries(JSON.parse(response));
-      } else {
-        alert('No session found!');
       }
       setIsLoading(false);
     }
@@ -32,8 +30,6 @@ export default function HomeScreen({ navigation, route }) {
   const goToWorkoutScreen = () => {
     if (localDataChecked) {
       navigation.navigate('WorkoutSeries', { series });
-    } else {
-      alert('No session found!');
     }
   };
 
@@ -60,7 +56,8 @@ export default function HomeScreen({ navigation, route }) {
     );
   }
 
-  return (
+  if(localDataChecked){
+    return (
     <View style={styles.container}>
       <View style={styles.viewStartingExercises}>
         <Pressable
@@ -114,5 +111,6 @@ export default function HomeScreen({ navigation, route }) {
       </View>
     </View>
   );
+}
 }
 

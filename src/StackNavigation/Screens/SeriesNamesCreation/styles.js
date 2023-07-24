@@ -9,6 +9,20 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 200,
+    width: 350,
+    borderColor: Colors.genericColors.calling,
+    borderWidth: 1,
+    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter, 
+  },
   flatListTextInput: {
    width: '100%',
   },
@@ -44,5 +58,10 @@ export const styles = StyleSheet.create({
   textpressable: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  text: {
+    color: Colors.genericColors.clear,
+    fontSize: 22,
+    textAlign: 'center',
   },
 });
