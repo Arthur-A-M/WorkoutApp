@@ -1,8 +1,10 @@
-import { Text, View, Pressable, ActivityIndicator } from 'react-native';
+import { Text, View, Pressable, ActivityIndicator, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 import { getStringData } from '../../../Functions';
-import { pressableStarting } from '../../../Components';
+import  PressableStarting  from '../../../Components';
+import { Colors } from '../../../Styles/Colors';
 
 import { styles } from './styles';
 
@@ -61,16 +63,36 @@ export default function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={styles.viewStartingExercises}>
-        <pressableStarting
-          imgaString={'ResistenceTrainning.jpg'}
-          textString={'GYM\nResistence Trainning'}
-          onPress={goToWorkoutScreen}
-        />
-        <pressableStarting
-          imgaString={'HIIT.jpg'}
-          textString={'HIIT'}
-          onPress={() => navigation.navigate('HIIT')}
-        />
+        <Pressable
+          style={({ pressed }) => [
+            styles.pressableStartingExercises,
+            pressed && styles.pressableStartingClicked,
+          ]}
+          onPress={goToWorkoutScreen}>
+          <View style={styles.viewStartingExercise}>
+            <Image
+              source={require(`../../../../assets/ResistenceTrainning.jpg`)}
+              style={styles.imageStartingExercises}
+            />
+            <Text style={styles.textStartingExercises}>GYM{'\n'}Resistence Training</Text>
+            <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
+          </View>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            styles.pressableStartingExercises,
+            pressed && styles.pressableStartingClicked,
+          ]}
+          onPress={() => navigation.navigate('HIIT')}>
+          <View style={styles.viewStartingExercise}>
+            <Image
+              source={require(`../../../../assets/HIIT.jpg`)}
+              style={styles.imageStartingExercises}
+            />
+            <Text style={styles.textStartingExercises}>HIIT</Text>
+            <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
+          </View>
+        </Pressable>
       </View>
       <View style={styles.viewCreatingExercises}>
         <Pressable

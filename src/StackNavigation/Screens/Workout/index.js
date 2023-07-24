@@ -58,7 +58,8 @@ export default function WorkoutScreen({ route }) {
     let interval;
     if (timerRunning) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+        const dateObj = new Date();
+        setTime(dateObj.getSeconds());
       }, 1000);
     } else {
       setTime(0);
