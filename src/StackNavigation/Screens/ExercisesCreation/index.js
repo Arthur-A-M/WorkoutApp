@@ -52,8 +52,9 @@ export default function ExercisesCreationScreen({ navigation, route }) {
             key={`${index} ${key}`}
             value={String(item[key])}
             onChangeText={(value) => handleInputChange(index, key, value)}
-            placeholder={key}
+            placeholder={key === 'load' ? 'load in kg': key}
             placeholderTextColor={Colors.genericColors.clear}
+            keyboardType={key === 'name' ? 'default' : 'numeric'}
           />
         ))}
       </View>
@@ -97,7 +98,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
             <View style={styles.modalView}>
               <Text style={styles.text}>Some values are empity</Text>
               <Pressable
-              style={styles.pressable}
+                style={styles.pressable}
                 onPress={() => setEmpityValue(!empityValue)}>
                 <Text>Continue Filling</Text>
               </Pressable>

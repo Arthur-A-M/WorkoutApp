@@ -2,28 +2,43 @@ import { Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
-import { ReturnTime } from '../../../Functions';
+import { ReturnTime, storeObjectData, getObjectData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
 
 import { styles } from './styles';
-
 
 export default function WorkoutScreen({ route }) {
   const [checkedExercises, setCheckedExercises] = useState([]);
   const [timerRunning, setTimerRunning] = useState(false);
   const [time, setTime] = useState(0);
+  const [realtime, setRealTime] = useState([0, 0]);
 
   const { exercises } = route.params;
 
+  const storageKey = hash(JSON.stringify(exercises));
+
   useEffect(() => {
-    const checkedTemp = Array(exercises?.length || 0).fill(false);
-    setCheckedExercises(checkedTemp);
+    async function fetchData() {
+      const checkedTemp = await getObjectData(storageKey);
+      setCheckedExercises(checkedTemp || []);
+    }
+    fetchData();
   }, []);
+
+function hash(str) {
+  let hashValue = 0;
+  for (let i = 0; i < str.length; i++) {
+    hashValue = (hashValue << 5) - hashValue + str.charCodeAt(i);
+    hashValue &= hashValue; // Convert to 32-bit integer
+  }
+  return String(hashValue);
+}
 
   const toggleCheck = (index) => {
     const checkedTemp = [...checkedExercises];
     checkedTemp[index] = !checkedTemp[index];
     setCheckedExercises(checkedTemp);
+    storeObjectData(storageKey, checkedTemp);
   };
 
   const renderExercise = ({ item, index }) => (
@@ -43,12 +58,12 @@ export default function WorkoutScreen({ route }) {
           <Text style={styles.text}>{item.repetitions}</Text>
         </View>
         <View style={[styles.viewDataType, { borderLeftWidth: 1, borderRightWidth: 1 }]}>
-          <Text style={styles.text}>Séries</Text>
+          <Text style={styles.text}>Series</Text>
           <Text style={styles.text}>{item.series}</Text>
         </View>
         <View style={styles.viewDataType}>
-          <Text style={styles.text}>Carga</Text>
-          <Text style={styles.text}>{item.load}</Text>
+          <Text style={styles.text}>Load</Text>
+          <Text style={styles.text}>{item.load}Kg</Text>
         </View>
       </View>
     </Pressable>
@@ -59,7 +74,8 @@ export default function WorkoutScreen({ route }) {
     if (timerRunning) {
       interval = setInterval(() => {
         const dateObj = new Date();
-        setTime(dateObj.getSeconds());
+        newTime = ((dateObj.getMinutes() - realtime[0])*60) + (dateObj.getSeconds() - realtime[1])
+        setTime(newTime);
       }, 1000);
     } else {
       setTime(0);
@@ -79,9 +95,21 @@ export default function WorkoutScreen({ route }) {
     if (timerRunning) {
       return ReturnTime(time);
     } else {
-      return 'Descansar';
+      return 'Resting';
     }
   };
+
+const operateTimer = () => {
+  const dateObj = new Date();
+  
+  if (!timerRunning) {        
+    setTimerRunning(true);
+    setRealTime([dateObj.getMinutes(), dateObj.getSeconds()]);
+  } else {
+    setTimerRunning(false);
+    setRealTime([0, 0]);
+  }
+}
 
   return (
     <View style={styles.container}>
@@ -91,9 +119,9 @@ export default function WorkoutScreen({ route }) {
         horizontal
         renderItem={renderExercise}
       />
-      <Pressable style={styles.pressableTimer} onPress={() => setTimerRunning(!timerRunning)}>
+      <Pressable style={styles.pressableTimer} onPress={() => operateTimer()}>
         {renderTimerIcon()}
-        <Text style={[styles.text, { fontSize: 35 }]}>{renderTimerText()}</Text>
+        <Text style={[styles.text, { fontSize: 35, marginRight: 10 }]}>{renderTimerText()}</Text>
       </Pressable>
     </View>
   );

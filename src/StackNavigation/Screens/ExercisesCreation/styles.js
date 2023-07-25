@@ -47,12 +47,13 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    width: 200,
+    width: 240,
     paddingHorizontal: 5,
     borderColor: Colors.genericColors.grayish,
     borderWidth: 1,
     color: Colors.genericColors.clear,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
+    textAlign: 'center',
   },
   pressable: {
     width: '65%',
