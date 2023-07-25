@@ -7,7 +7,7 @@
     "icon": "./assets/WorkoutAppIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/WorkoutAppIcon.png",
+      "image": "./assets/WorkoutSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

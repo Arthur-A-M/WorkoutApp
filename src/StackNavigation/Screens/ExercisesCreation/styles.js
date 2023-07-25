@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   viewTextInput: {
-    paddingVertical: 5
+    paddingVertical: 20
   },
   viewCreated: {
     height: 200,
@@ -36,9 +36,6 @@ export const styles = StyleSheet.create({
     borderColor: Colors.genericColors.calling,
     borderWidth: 1,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter, 
-  },
-  flatListIems: {
-
   },
   text: {
     color: Colors.genericColors.clear,

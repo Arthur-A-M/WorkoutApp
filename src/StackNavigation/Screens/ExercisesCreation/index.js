@@ -1,7 +1,7 @@
-import { Text, View, Pressable, TextInput, FlatList, Modal } from 'react-native';
+import { Keyboard, Text, View, Pressable, TextInput, FlatList, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-import { SelectList } from 'react-native-dropdown-select-list'
+import { SelectList } from 'react-native-dropdown-select-list';
 
 import { storeObjectData, getStringData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
@@ -13,6 +13,21 @@ export default function ExercisesCreationScreen({ navigation, route }) {
   const [exercises, setExercises] = useState([]);
   const [created, setCreated] = useState(false);
   const [empityValue, setEmpityValue] = useState(false);
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
@@ -52,9 +67,10 @@ export default function ExercisesCreationScreen({ navigation, route }) {
             key={`${index} ${key}`}
             value={String(item[key])}
             onChangeText={(value) => handleInputChange(index, key, value)}
-            placeholder={key === 'load' ? 'load in kg': key}
+            placeholder={key === 'load' ? 'load in kg' : key}
             placeholderTextColor={Colors.genericColors.clear}
             keyboardType={key === 'name' ? 'default' : 'numeric'}
+            onSubmitEditing={Keyboard.dismiss}
           />
         ))}
       </View>
@@ -106,21 +122,21 @@ export default function ExercisesCreationScreen({ navigation, route }) {
           </View>
         </Modal>
         <FlatList
-          contentContainerStyle={styles.flatListIems}
           data={exercises}
           renderItem={renderExercise} />
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Pressable
-            style={[styles.pressable, { marginVertical: 20 }]}
-            onPress={handleExerciseCreation}>
-            <Text>Create exercises</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.pressable, { width: 100, marginLeft: 8, height: 40 }]}
-            onPress={() => { setNumberOfExercises(0); setExercises([]); }}>
-            <Text>Redefine exercises</Text>
-          </Pressable>
-        </View>
+        {keyboardStatus ? null
+          : <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Pressable
+              style={[styles.pressable, { marginVertical: 20 }]}
+              onPress={handleExerciseCreation}>
+              <Text>Create exercises</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.pressable, { width: 100, marginLeft: 8, height: 40 }]}
+              onPress={() => { setNumberOfExercises(0); setExercises([]); }}>
+              <Text>Redefine exercises</Text>
+            </Pressable>
+          </View>}
       </View>
     );
   } else if (!created) {
