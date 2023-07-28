@@ -3,18 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../../Styles/Colors';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.coreColors.secundary,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  inputsView: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
   inputView: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -48,12 +36,7 @@ export const styles = StyleSheet.create({
     width: '70%',
     height: 75,
     marginVertical: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 40,
-    borderColor: Colors.genericColors.dark,
-    borderWidth: 1,
-    backgroundColor: Colors.coreColors.main,
   },
   pressableSignUpClicked: {
     opacity: 0.7,
@@ -83,6 +66,7 @@ export const styles = StyleSheet.create({
   textLogin: {
     fontSize: 25,
     fontWeight: 'bold',
+    color: Colors.genericColors.dark
   },
   textSignUp: {
     fontSize: 20,

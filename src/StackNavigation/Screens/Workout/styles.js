@@ -3,12 +3,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from '../../../Styles/Colors';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.coreColors.secundary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   viewData: {
     flexDirection: 'row',
     justifyContent: 'space-between',

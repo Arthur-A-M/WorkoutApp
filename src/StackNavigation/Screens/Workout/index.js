@@ -4,6 +4,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { ReturnTime, storeObjectData, getObjectData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -112,7 +113,7 @@ const operateTimer = () => {
 }
 
   return (
-    <View style={styles.container}>
+    <View style={unifiedStyles.container}>
       <FlatList
         contentContainerStyle={{ alignItems: 'center' }}
         data={exercises}

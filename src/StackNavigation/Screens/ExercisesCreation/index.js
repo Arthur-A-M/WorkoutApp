@@ -5,6 +5,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 
 import { storeObjectData, getStringData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -103,18 +104,18 @@ export default function ExercisesCreationScreen({ navigation, route }) {
 
   if (exercises.length > 0 && !created) {
     return (
-      <View style={styles.container}>
+      <View style={unifiedStyles.container}>
         <Modal
           animationType="slide"
           transparent={true}
           visible={empityValue}
           onRequestClose={() => setEmpityValue(!empityValue)}
         >
-          <View style={styles.centeredView}>
+          <View style={unifiedStyles.containedView}>
             <View style={styles.modalView}>
               <Text style={styles.text}>Some values are empity</Text>
               <Pressable
-                style={styles.pressable}
+                style={[unifiedStyles.pressableMainColor, styles.pressable]}
                 onPress={() => setEmpityValue(!empityValue)}>
                 <Text>Continue Filling</Text>
               </Pressable>
@@ -127,12 +128,12 @@ export default function ExercisesCreationScreen({ navigation, route }) {
         {keyboardStatus ? null
           : <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable
-              style={[styles.pressable, { marginVertical: 20 }]}
+              style={[[unifiedStyles.pressableMainColor, styles.pressable], { marginVertical: 20 }]}
               onPress={handleExerciseCreation}>
               <Text>Create exercises</Text>
             </Pressable>
             <Pressable
-              style={[styles.pressable, { width: 100, marginLeft: 8, height: 40 }]}
+              style={[[unifiedStyles.pressableMainColor, styles.pressable], { width: 100, marginLeft: 8, height: 40 }]}
               onPress={() => { setNumberOfExercises(0); setExercises([]); }}>
               <Text>Redefine exercises</Text>
             </Pressable>
@@ -141,7 +142,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
     );
   } else if (!created) {
     return (
-      <View style={styles.container}>
+      <View style={unifiedStyles.container}>
         <Text style={styles.text}>{serie}</Text>
         <SelectList
           boxStyles={{ backgroundColor: Colors.genericColors.grayish }}
@@ -156,7 +157,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
           placeholder="N° of series"
         />
         <Pressable
-          style={styles.pressable}
+          style={[unifiedStyles.pressableMainColor, styles.pressable]}
           onPress={defineListOfexercises}>
           <Text>Define exercises</Text>
         </Pressable>
@@ -164,17 +165,17 @@ export default function ExercisesCreationScreen({ navigation, route }) {
     );
   } else {
     return (
-      <View style={styles.container}>
+      <View style={unifiedStyles.container}>
         <View style={styles.viewCreated}>
           <Text style={[styles.text, { marginTop: 25 }]}>{serie}{'\n'}Created</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable
-              style={[styles.pressableCreated, { borderBottomLeftRadius: 20 }]}
+              style={[unifiedStyles.containedView, styles.pressableCreated, { borderBottomLeftRadius: 20 }]}
               onPress={navigation.goBack}>
               <Text>Finish</Text>
             </Pressable>
             <Pressable
-              style={[styles.pressableCreated, { borderBottomRightRadius: 20 }]}
+              style={[unifiedStyles.containedView, styles.pressableCreated, { borderBottomRightRadius: 20 }]}
               onPress={() => setCreated(false)}>
               <Text>Edit more</Text>
             </Pressable>

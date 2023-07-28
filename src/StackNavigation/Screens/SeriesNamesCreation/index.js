@@ -5,6 +5,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 
 import { storeObjectData, checkInteger } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -81,18 +82,18 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
 
   if (namesConfirmed) {
     return (
-      <View style={styles.container}>
+      <View style={[unifiedStyles.container, { justifyContent: 'space-between' }]}>
         <Modal
           animationType="slide"
           transparent={true}
           visible={modal}
           onRequestClose={() => setBadValue('')}
         >
-          <View style={styles.centeredView}>
+          <View style={unifiedStyles.containedView}>
             <View style={styles.modalView}>
               <Text style={styles.text}>{badValue}</Text>
               <Pressable
-                style={styles.pressable}
+                style={[unifiedStyles.pressableMainColor, styles.pressable]}
                 onPress={() => setBadValue('')}>
                 <Text>Continue Filling</Text>
               </Pressable>
@@ -106,7 +107,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           style={styles.flatListTextInput}
         />
         <Pressable
-          style={styles.pressable}
+          style={[unifiedStyles.pressableMainColor, styles.pressable]}
           onPress={createSeries}>
           <Text style={styles.textpressable}>Create series</Text>
         </Pressable>
@@ -114,7 +115,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
     );
   } else {
     return (
-      <View style={[styles.container, { justifyContent: 'center' }]}>
+      <View style={unifiedStyles.container}>
         <SelectList
           boxStyles={{ backgroundColor: Colors.genericColors.grayish }}
           inputStyles={{ color: Colors.genericColors.clear }}
@@ -128,7 +129,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           placeholder="N° of series"
         />
         <Pressable
-          style={styles.pressable}
+          style={[unifiedStyles.pressableMainColor, styles.pressable]}
           onPress={() => {
             if (checkInteger(numberOfSeries) && numberOfSeries > 0) {
               defineListOfNames();

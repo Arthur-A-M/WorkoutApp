@@ -4,12 +4,6 @@ import { Colors } from '../../../Styles/Colors';
 
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.coreColors.secundary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   viewTextInput: {
     paddingVertical: 20
   },
@@ -22,11 +16,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     borderRadius: 20
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   modalView: {
     justifyContent: 'center',
@@ -56,18 +45,10 @@ export const styles = StyleSheet.create({
     width: '65%',
     height: 70,
     marginVertical: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 40,
-    borderColor: Colors.genericColors.dark,
-    borderWidth: 1,
-    backgroundColor: Colors.coreColors.main,
   },
   pressableCreated: {
-    flex: 1,
     height: 70,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderColor: Colors.genericColors.dark,
     borderWidth: 1,
     backgroundColor: Colors.coreColors.main,

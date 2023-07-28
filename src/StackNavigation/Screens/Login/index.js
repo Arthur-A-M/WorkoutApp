@@ -7,6 +7,7 @@ import { Feather } from '@expo/vector-icons';
 
 import { storeObjectData, getObjectData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors'
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -39,8 +40,8 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputsView}>
+    <View style={[unifiedStyles.container, { justifyContent: 'space-between' }]}>
+      <View style={[unifiedStyles.containedView, { justifyContent: 'flex-end' }]}>
         <View style={styles.inputView}>
           <Feather name="mail" size={24} color={Colors.genericColors.clear} />
           <TextInput
@@ -81,12 +82,8 @@ export default function LoginScreen({ navigation }) {
         <Pressable
           onPress={handleLogin}
           style={({ pressed }) => [
-            styles.pressableLogin,
-            pressed && {
-              opacity: 0.7,
-              width: '65%', // Dynamic styles isn't working
-              height: 70,
-            },
+            unifiedStyles.pressableMainColor ,styles.pressableLogin,
+            pressed && styles.pressableClickedLogin,
           ]}
         >
           <Text style={styles.textLogin}>Login</Text>
@@ -95,11 +92,7 @@ export default function LoginScreen({ navigation }) {
           onPress={() => alert('Not implemented yet!')}
           style={({ pressed }) => [
             styles.pressableSignUp,
-            pressed && {
-              opacity: 0.7,
-              width: '45%', // Dynamic styles isn't working
-              height: 45,
-            },
+            pressed && styles.pressableSignUpClicked,
           ]}
         >
           <Text style={styles.textSignUp}>Sign Up</Text>

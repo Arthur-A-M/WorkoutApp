@@ -2,6 +2,7 @@ import { Text, View, Pressable } from 'react-native';
 import React  from 'react';
 
 import { getObjectData } from '../../../Functions';
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -14,10 +15,10 @@ export default function WorkoutSeriesScreen({ navigation, route }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={unifiedStyles.container}>
             {series.map((serie, index) => (
                 <Pressable
-                    style={styles.pressable}
+                    style={[unifiedStyles.containedView, styles.pressable, { width: '90%', }]}
                     key={index}
                     onPress={() => fetchExercises(serie)}
                 >

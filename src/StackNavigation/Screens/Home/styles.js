@@ -3,18 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../../Styles/Colors';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.coreColors.secundary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewStartingExercises: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
   viewCreatingExercises: {
     flex: 0.2,
     width: '100%',

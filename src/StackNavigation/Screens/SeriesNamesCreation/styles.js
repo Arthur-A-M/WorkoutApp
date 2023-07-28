@@ -3,17 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../../Styles/Colors';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.coreColors.secundary,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   modalView: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -48,12 +37,7 @@ export const styles = StyleSheet.create({
     width: '65%',
     height: 70,
     marginVertical: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 40,
-    borderColor: Colors.genericColors.dark,
-    borderWidth: 1,
-    backgroundColor: Colors.coreColors.main,
   },
   textpressable: {
     fontSize: 20,

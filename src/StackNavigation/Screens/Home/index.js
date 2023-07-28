@@ -5,6 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { getStringData } from '../../../Functions';
 import  PressableStarting  from '../../../Components';
 import { Colors } from '../../../Styles/Colors';
+import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
@@ -35,7 +36,7 @@ export default function HomeScreen({ navigation, route }) {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
+      <View style={unifiedStyles.container}>
         <ActivityIndicator />
       </View>
     );
@@ -43,7 +44,7 @@ export default function HomeScreen({ navigation, route }) {
 
   if (!localDataChecked) {
     return (
-      <View style={styles.container}>
+      <View style={unifiedStyles.container}>
         <Pressable
           style={({ pressed }) => [
             styles.pressableCreatingExercises,
@@ -58,8 +59,8 @@ export default function HomeScreen({ navigation, route }) {
 
   if(localDataChecked){
     return (
-    <View style={styles.container}>
-      <View style={styles.viewStartingExercises}>
+    <View style={unifiedStyles.container}>
+      <View style={[unifiedStyles.containedView, { justifyContent: 'space-around' }]}>
         <Pressable
           style={({ pressed }) => [
             styles.pressableStartingExercises,
