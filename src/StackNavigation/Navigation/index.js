@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../Screens/Login';
 import HomeScreen from '../Screens/Home';
 import WorkoutScreen from '../Screens/Workout';
-import HIITScreen from '../Screens/HIIT';
+import CardioScreen from '../Screens/HIIT';
 import SeriesNamesCreationScreen from '../Screens/SeriesNamesCreation';
 import SeriesSelectionCreation from '../Screens/SeriesSelectionCreation';
 import ExercisesCreationScreen from '../Screens/ExercisesCreation';
@@ -19,7 +19,7 @@ export default function Navigation() {
         { name: "Home", component: HomeScreen },
         { name: "Workout", component: WorkoutScreen },
         { name: "WorkoutSeries", component: WorkoutSeriesScreen },
-        { name: "HIIT", component: HIITScreen },
+        { name: "Cardio", component: CardioScreen },
         { name: "SeriesNamesCreation", component: SeriesNamesCreationScreen },
         { name: "SeriesSelectionCreation", component: SeriesSelectionCreation },
         { name: "ExercisesCreation", component: ExercisesCreationScreen },

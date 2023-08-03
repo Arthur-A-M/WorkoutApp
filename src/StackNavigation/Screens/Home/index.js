@@ -81,13 +81,13 @@ export default function HomeScreen({ navigation, route }) {
             styles.pressableStartingExercises,
             pressed && styles.pressableStartingClicked,
           ]}
-          onPress={() => navigation.navigate('HIIT')}>
+          onPress={() => navigation.navigate('Cardio')}>
           <View style={styles.viewStartingExercise}>
             <Image
               source={require(`../../../../assets/HIIT.jpg`)}
               style={styles.imageStartingExercises}
             />
-            <Text style={styles.textStartingExercises}>HIIT</Text>
+            <Text style={styles.textStartingExercises}>Cardio</Text>
             <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
           </View>
         </Pressable>

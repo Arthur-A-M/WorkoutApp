@@ -5,7 +5,7 @@ import { unifiedStyles } from '../../../Styles/styles';
 
 import { styles } from './styles';
 
-export default function HIITScreen() {
+export default function CardioScreen() {
   return (
     <View style={unifiedStyles.container}>
       <Text>Not yet implemented</Text>
