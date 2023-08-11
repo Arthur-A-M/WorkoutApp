@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../Screens/Login';
 import HomeScreen from '../Screens/Home';
 import WorkoutScreen from '../Screens/Workout';
-import CardioScreen from '../Screens/HIIT';
+import CardioScreen from '../Screens/Cardio';
 import SeriesNamesCreationScreen from '../Screens/SeriesNamesCreation';
 import SeriesSelectionCreation from '../Screens/SeriesSelectionCreation';
 import ExercisesCreationScreen from '../Screens/ExercisesCreation';

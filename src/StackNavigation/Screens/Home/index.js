@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation, route }) {
             styles.pressableStartingExercises,
             pressed && styles.pressableStartingClicked,
           ]}
-          onPress={() => navigation.navigate('Cardio')}>
+          onPress={() => navigation.navigate('Cardio', { email })}>
           <View style={styles.viewStartingExercise}>
             <Image
               source={require(`../../../../assets/HIIT.jpg`)}
