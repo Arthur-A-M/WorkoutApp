@@ -26,14 +26,14 @@ export default function WorkoutScreen({ route }) {
     fetchData();
   }, []);
 
-function hash(str) {
-  let hashValue = 0;
-  for (let i = 0; i < str.length; i++) {
-    hashValue = (hashValue << 5) - hashValue + str.charCodeAt(i);
-    hashValue &= hashValue; // Convert to 32-bit integer
+  function hash(str) {
+    let hashValue = 0;
+    for (let i = 0; i < str.length; i++) {
+      hashValue = (hashValue << 5) - hashValue + str.charCodeAt(i);
+      hashValue &= hashValue; // Convert to 32-bit integer
+    }
+    return String(hashValue);
   }
-  return String(hashValue);
-}
 
   const toggleCheck = (index) => {
     const checkedTemp = [...checkedExercises];
@@ -43,16 +43,22 @@ function hash(str) {
   };
 
   const renderExercise = ({ item, index }) => (
-    <Pressable
+    <View
       key={item[0]}
-      onLongPress={() => toggleCheck(index)}
-      delayLongPress={300}
       style={styles.pressableExercises}
     >
       <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
-      {checkedExercises[index] ? (
-        <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>
-      ) : null}
+      <Pressable
+      style={{width: 70, height: 70, borderColor: Colors.genericColors.clear, borderWidth: 1, marginHorizontal: 25}}
+        onLongPress={() => toggleCheck(index)}
+        delayLongPress={200}
+      >
+        {checkedExercises[index] ? (
+
+          <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>
+
+        ) : null}
+      </Pressable>
       <View style={styles.viewData}>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Reps</Text>
@@ -67,7 +73,7 @@ function hash(str) {
           <Text style={styles.text}>{item.load}Kg</Text>
         </View>
       </View>
-    </Pressable>
+    </View>
   );
 
   useEffect(() => {
@@ -75,7 +81,7 @@ function hash(str) {
     if (timerRunning) {
       interval = setInterval(() => {
         const dateObj = new Date();
-        newTime = ((dateObj.getMinutes() - realtime[0])*60) + (dateObj.getSeconds() - realtime[1])
+        newTime = ((dateObj.getMinutes() - realtime[0]) * 60) + (dateObj.getSeconds() - realtime[1])
         setTime(newTime);
       }, 1000);
     } else {
@@ -100,17 +106,17 @@ function hash(str) {
     }
   };
 
-const operateTimer = () => {
-  const dateObj = new Date();
-  
-  if (!timerRunning) {        
-    setTimerRunning(true);
-    setRealTime([dateObj.getMinutes(), dateObj.getSeconds()]);
-  } else {
-    setTimerRunning(false);
-    setRealTime([0, 0]);
+  const operateTimer = () => {
+    const dateObj = new Date();
+
+    if (!timerRunning) {
+      setTimerRunning(true);
+      setRealTime([dateObj.getMinutes(), dateObj.getSeconds()]);
+    } else {
+      setTimerRunning(false);
+      setRealTime([0, 0]);
+    }
   }
-}
 
   return (
     <View style={unifiedStyles.container}>
