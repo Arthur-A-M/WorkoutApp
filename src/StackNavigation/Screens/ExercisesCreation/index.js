@@ -6,6 +6,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { storeObjectData, getStringData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
+import { renderExercise } from '../../../Components'
 
 import { styles } from './styles';
 
@@ -49,33 +50,6 @@ export default function ExercisesCreationScreen({ navigation, route }) {
     const updatedExercises = [...exercises];
     updatedExercises[index][key] = value;
     setExercises(updatedExercises);
-  };
-
-  const renderExercise = ({ item, index }) => {
-    return (
-      <View style={styles.viewTextInput}>
-        {Object.keys(item).map((key) => (
-          <TextInput
-            style={[
-              styles.textInput,
-              {
-                borderBottomLeftRadius: key === 'load' ? 10 : 0,
-                borderBottomRightRadius: key === 'load' ? 10 : 0,
-                borderTopLeftRadius: key === 'name' ? 10 : 0,
-                borderTopRightRadius: key === 'name' ? 10 : 0
-              }
-            ]}
-            key={`${index} ${key}`}
-            value={String(item[key])}
-            onChangeText={(value) => handleInputChange(index, key, value)}
-            placeholder={key === 'load' ? 'load in kg' : key}
-            placeholderTextColor={Colors.genericColors.clear}
-            keyboardType={key === 'name' ? 'default' : 'numeric'}
-            onSubmitEditing={Keyboard.dismiss}
-          />
-        ))}
-      </View>
-    );
   };
 
   const defineListOfexercises = () => {
@@ -124,7 +98,8 @@ export default function ExercisesCreationScreen({ navigation, route }) {
         </Modal>
         <FlatList
           data={exercises}
-          renderItem={renderExercise} />
+          renderItem={({ item, index }) => renderExercise({ item, index, onChangeText: handleInputChange, Keyboard: Keyboard.dismiss })}
+        />
         {keyboardStatus ? null
           : <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable

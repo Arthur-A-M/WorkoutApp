@@ -1,4 +1,4 @@
-import { Text, View, Pressable, ActivityIndicator, Image } from 'react-native';
+import { Text, View, Pressable, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { getStringData } from '../../../Functions';

@@ -33,5 +33,18 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.genericColors.clear,
         textAlign: 'center',
-      }
+      },
+      viewTextInput: {
+        paddingVertical: 20
+      },
+      textInput: {
+        height: 40,
+        width: 240,
+        paddingHorizontal: 5,
+        borderColor: Colors.genericColors.grayish,
+        borderWidth: 1,
+        color: Colors.genericColors.clear,
+        backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
+        textAlign: 'center',
+      },
 });
