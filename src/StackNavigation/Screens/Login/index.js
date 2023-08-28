@@ -17,17 +17,17 @@ import { styles } from './styles';
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checkboxState, setCheckboxState] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const rememberKey = 'rememberWorkouApp';
+  const rememberKey = 'rememberWorkoutApp';
 
   useEffect(() => {
     const fetchData = async () => {
-      const value = await getObjectData(rememberKey);
-      if (value !== null) {
-        setEmail(value.email);
-        setPassword(value.password);
-        setCheckboxState(true);
+      const data = await getObjectData(rememberKey);
+      if (data !== null) {
+        setEmail(data.email);
+        setPassword(data.password);
+        setRememberMe(true);
       }
     };
 
@@ -36,7 +36,7 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = () => {
     if (isValidEmail(email) && isValidPassword(password)) {
-      const data = checkboxState ? { email, password } : null;
+      const data = rememberMe ? { email, password } : null;
       storeObjectData(rememberKey, data);
       navigation.navigate('Home', { email });
     }
@@ -73,8 +73,8 @@ export default function LoginScreen({ navigation }) {
         </View>
         <View style={styles.checkboxView}>
           <BouncyCheckbox
-            isChecked={checkboxState}
-            onPress={() => setCheckboxState(!checkboxState)}
+            isChecked={rememberMe}
+            onPress={() => setRememberMe(!rememberMe)}
             fillColor={Colors.coreColors.main}
             disableBuiltInState={true}
           />
