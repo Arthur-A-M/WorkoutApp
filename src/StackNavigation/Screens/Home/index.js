@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
 import { getStringData } from '../../../Functions';
-import  PressableStarting  from '../../../Components';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
 

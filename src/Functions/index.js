@@ -61,3 +61,41 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       return true;
     }
   };
+
+  export const isValidPassword = (password) => {
+    // Define the regex pattern for a valid password
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    // Check if the password has at least one lowercase letter
+    if (!/(?=.*[a-z])/.test(password.trim())) {
+      return false;
+    }
+
+    // Check if the password has at least one uppercase letter
+    if (!/(?=.*[A-Z])/.test(password.trim())) {
+      return false;
+    }
+
+    // Check if the password has at least one digit
+    if (!/(?=.*\d)/.test(password.trim())) {
+      return false;
+    }
+
+    // Check if the password has at least one special character
+    if (!/(?=.*[@$!%*?&])/.test(password.trim())) {
+      return false;
+    }
+
+    // Check if the password has a minimum length of 8 characters
+    if (!/(?=.{8,})/.test(password.trim())) {
+      return false;
+    }
+
+    // If all tests pass, return true
+    return true;
+  }
+
+  export const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email.trim());
+  };

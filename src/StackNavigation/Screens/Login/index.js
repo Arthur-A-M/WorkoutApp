@@ -5,7 +5,10 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
-import { storeObjectData, getObjectData } from '../../../Functions';
+import { storeObjectData, 
+  getObjectData, 
+  isValidPassword, 
+  isValidEmail } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors'
 import { unifiedStyles } from '../../../Styles/styles';
 
@@ -32,7 +35,7 @@ export default function LoginScreen({ navigation }) {
   }, []);
 
   const handleLogin = () => {
-    if (email.trim() !== '' && password.trim() !== '') {
+    if (isValidEmail(email) && isValidPassword(password)) {
       const data = checkboxState ? { email, password } : null;
       storeObjectData(rememberKey, data);
       navigation.navigate('Home', { email });
@@ -82,7 +85,7 @@ export default function LoginScreen({ navigation }) {
         <Pressable
           onPress={handleLogin}
           style={({ pressed }) => [
-            unifiedStyles.pressableMainColor ,styles.pressableLogin,
+            unifiedStyles.pressableMainColor, styles.pressableLogin,
             pressed && styles.pressableClickedLogin,
           ]}
         >
