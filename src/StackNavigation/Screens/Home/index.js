@@ -1,10 +1,9 @@
 import { Text, View, Pressable, ActivityIndicator, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { AntDesign } from '@expo/vector-icons';
 
 import { getStringData } from '../../../Functions';
-import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
+import { ExerciseButton } from '../../../Components';
 
 import { styles } from './styles';
 
@@ -49,47 +48,29 @@ export default function HomeScreen({ navigation, route }) {
             styles.pressableCreatingExercises,
             pressed && styles.pressableCreatingClicked,
           ]}
-          onPress={() => navigation.navigate('SeriesNamesCreation', { email })}>
+          onPress={() =>
+            navigation.navigate('SeriesNamesCreation', { email })
+          }
+        >
           <Text style={styles.textExercises}>Create New Series</Text>
         </Pressable>
       </View>
     );
   }
 
-  if(localDataChecked){
-    return (
+  return (
     <View style={unifiedStyles.container}>
-      <View style={[unifiedStyles.containedView, { justifyContent: 'space-around' }]}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.pressableStartingExercises,
-            pressed && styles.pressableStartingClicked,
-          ]}
-          onPress={goToWorkoutScreen}>
-          <View style={styles.viewStartingExercise}>
-            <Image
-              source={require(`../../../../assets/ResistenceTrainning.jpg`)}
-              style={styles.imageStartingExercises}
-            />
-            <Text style={styles.textStartingExercises}>GYM{'\n'}Resistence Training</Text>
-            <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
-          </View>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.pressableStartingExercises,
-            pressed && styles.pressableStartingClicked,
-          ]}
-          onPress={() => navigation.navigate('Cardio', { email })}>
-          <View style={styles.viewStartingExercise}>
-            <Image
-              source={require(`../../../../assets/HIIT.jpg`)}
-              style={styles.imageStartingExercises}
-            />
-            <Text style={styles.textStartingExercises}>Cardio</Text>
-            <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
-          </View>
-        </Pressable>
+      <View
+        style={[unifiedStyles.containedView, { justifyContent: "space-around" }]}
+      >
+        <ExerciseButton
+          type={"ResistenceTrainning"}
+          onPress={goToWorkoutScreen}
+        />
+        <ExerciseButton
+         type={"Cardio"} 
+         onPress={() => navigation.navigate('Cardio', { email })}
+         />
       </View>
       <View style={styles.viewCreatingExercises}>
         <Pressable
@@ -97,7 +78,10 @@ export default function HomeScreen({ navigation, route }) {
             styles.pressableCreatingExercises,
             pressed && styles.pressableCreatingClicked,
           ]}
-          onPress={() => navigation.navigate('SeriesNamesCreation', { email })}>
+          onPress={() =>
+            navigation.navigate('SeriesNamesCreation', { email })
+          }
+        >
           <Text style={styles.textExercises}>Create New Series</Text>
         </Pressable>
         <Pressable
@@ -105,12 +89,14 @@ export default function HomeScreen({ navigation, route }) {
             styles.pressableCreatingExercises,
             pressed && styles.pressableCreatingClicked,
           ]}
-          onPress={() => navigation.navigate('SeriesSelectionCreation', { series })}>
+          onPress={() =>
+            navigation.navigate('SeriesSelectionCreation', { series })
+          }
+        >
           <Text style={styles.textExercises}>Edit Exercises</Text>
         </Pressable>
       </View>
     </View>
   );
-}
 }
 
