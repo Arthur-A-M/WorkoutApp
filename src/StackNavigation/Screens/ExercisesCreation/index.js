@@ -3,17 +3,17 @@ import {
   Text,
   View,
   Pressable,
-  FlatList,
-  Modal
+  FlatList
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list';
 
 import { storeObjectData, getStringData } from '../../../Functions';
+import { renderExercise, Warning } from '../../../Components';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
-import { renderExercise } from '../../../Components';
+
 
 import { styles } from './styles';
 
@@ -87,23 +87,12 @@ export default function ExercisesCreationScreen({ navigation, route }) {
   if (exercises.length > 0 && !created) {
     return (
       <View style={unifiedStyles.container}>
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <Warning
+          warning='Some values are empity'
           visible={empityValue}
+          onPress={() => setEmpityValue(!empityValue)}
           onRequestClose={() => setEmpityValue(!empityValue)}
-        >
-          <View style={unifiedStyles.containedView}>
-            <View style={unifiedStyles.modalView}>
-              <Text style={unifiedStyles.bigText}>Some values are empity</Text>
-              <Pressable
-                style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
-                onPress={() => setEmpityValue(!empityValue)}>
-                <Text>Continue Filling</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
+        />
         <FlatList
           data={exercises}
           renderItem={({ item, index }) => renderExercise({ item, index, onChangeText: handleInputChange, Keyboard: Keyboard.dismiss })}

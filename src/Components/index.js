@@ -83,7 +83,7 @@ export const renderTimerIcon = (timerRunning) => {
   }
 };
 
-export const Warning = ({ visible, onPress, onRequestClose }) => {
+export const Warning = ({ warning, visible, onPress, onRequestClose }) => {
   return (
     <Modal
       animationType="slide"
@@ -93,7 +93,7 @@ export const Warning = ({ visible, onPress, onRequestClose }) => {
     >
       <View style={unifiedStyles.containedView}>
         <View style={unifiedStyles.modalView}>
-          <Text style={unifiedStyles.bigText}>Some values are empity</Text>
+          <Text style={unifiedStyles.bigText}>{warning}</Text>
           <Pressable
             style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
             onPress={onPress}>

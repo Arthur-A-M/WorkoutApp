@@ -3,8 +3,7 @@ import {
   View,
   Pressable,
   FlatList,
-  TextInput,
-  Modal
+  TextInput
 } from 'react-native';
 import React,
 {
@@ -16,6 +15,7 @@ import React,
 import { SelectList } from 'react-native-dropdown-select-list'
 
 import { storeObjectData, checkInteger } from '../../../Functions';
+import { Warning } from '../../../Components';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
 
@@ -95,23 +95,12 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
   if (namesConfirmed) {
     return (
       <View style={[unifiedStyles.container, { justifyContent: 'space-between' }]}>
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <Warning
+          warning={badValue}
           visible={modal}
+          onPress={() => setBadValue('')}
           onRequestClose={() => setBadValue('')}
-        >
-          <View style={unifiedStyles.containedView}>
-            <View style={unifiedStyles.modalView}>
-              <Text style={unifiedStyles.bigText}>{badValue}</Text>
-              <Pressable
-                style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
-                onPress={() => setBadValue('')}>
-                <Text>Continue Filling</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
+        />
         <FlatList
           contentContainerStyle={styles.flatListIems}
           data={seriesNames}
