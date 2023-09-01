@@ -1,10 +1,10 @@
 import { Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { ReturnTime, storeObjectData, getObjectData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
+import { renderTimerIcon } from '../../../Components';
 
 import { styles } from './styles';
 
@@ -94,14 +94,6 @@ export default function WorkoutScreen({ route }) {
     return () => clearInterval(interval);
   }, [timerRunning]);
 
-  const renderTimerIcon = () => {
-    if (timerRunning) {
-      return <Entypo name="controller-stop" size={30} color={Colors.coreColors.main} />;
-    } else {
-      return <AntDesign name="play" size={30} color={Colors.coreColors.main} />;
-    }
-  };
-
   const renderTimerText = () => {
     if (timerRunning) {
       return ReturnTime(time);
@@ -131,7 +123,7 @@ export default function WorkoutScreen({ route }) {
         renderItem={renderExercise}
       />
       <Pressable style={styles.pressableTimer} onPress={() => operateTimer()}>
-        {renderTimerIcon()}
+        {renderTimerIcon(timerRunning)}
         <Text style={[styles.text, { fontSize: 35, marginRight: 10 }]}>{renderTimerText()}</Text>
       </Pressable>
     </View>

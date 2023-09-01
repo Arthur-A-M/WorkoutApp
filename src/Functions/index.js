@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
   export const storeString = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, value);
@@ -99,3 +100,4 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email.trim());
   };
+

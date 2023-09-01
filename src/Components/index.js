@@ -1,7 +1,7 @@
 import { Text, View, Pressable, Image, TextInput } from 'react-native';
 import React from 'react';
 import { Colors } from '../Styles/Colors';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { styles } from './styles';
 
@@ -63,4 +63,13 @@ export const renderExercise = ({ item, index, onChangeText, keyboard }) => {
       {Object.keys(item).map((key) => renderTextInput(key))}
     </View>
   );
+};
+
+
+export const renderTimerIcon = (timerRunning) => {
+  if (timerRunning) {
+    return <Entypo name="controller-stop" size={30} color={Colors.coreColors.main} />;
+  } else {
+    return <AntDesign name="play" size={30} color={Colors.coreColors.main} />;
+  }
 };
