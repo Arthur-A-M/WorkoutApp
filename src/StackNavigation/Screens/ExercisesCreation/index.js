@@ -1,4 +1,4 @@
-import { Keyboard, Text, View, Pressable, TextInput, FlatList, Modal } from 'react-native';
+import { Keyboard, Text, View, Pressable, FlatList, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -6,7 +6,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { storeObjectData, getStringData } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
-import { renderExercise } from '../../../Components'
+import { renderExercise } from '../../../Components';
 
 import { styles } from './styles';
 
@@ -58,6 +58,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
       repetitions: '',
       series: '',
       load: '',
+      rest: '',
     }));
     setExercises(updatedExercises);
   };
