@@ -1,4 +1,9 @@
-import { Keyboard, Text, View, Pressable, FlatList, Modal } from 'react-native';
+import { Keyboard, 
+  Text, 
+  View, 
+  Pressable, 
+  FlatList, 
+  Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -88,7 +93,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
         >
           <View style={unifiedStyles.containedView}>
             <View style={unifiedStyles.modalView}>
-              <Text style={styles.text}>Some values are empity</Text>
+              <Text style={unifiedStyles.bigText}>Some values are empity</Text>
               <Pressable
                 style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
                 onPress={() => setEmpityValue(!empityValue)}>
@@ -119,7 +124,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
   } else if (!created) {
     return (
       <View style={unifiedStyles.container}>
-        <Text style={styles.text}>{serie}</Text>
+        <Text style={unifiedStyles.bigText}>{serie}</Text>
         <SelectList
           boxStyles={{ backgroundColor: Colors.genericColors.grayish }}
           inputStyles={{ color: Colors.genericColors.clear }}
@@ -143,7 +148,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
     return (
       <View style={unifiedStyles.container}>
         <View style={styles.viewCreated}>
-          <Text style={[styles.text, { marginTop: 25 }]}>{serie}{'\n'}Created</Text>
+          <Text style={[unifiedStyles.bigText, { marginTop: 25 }]}>{serie}{'\n'}Created</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable
               style={[unifiedStyles.containedView, styles.pressableCreated, { borderBottomLeftRadius: 20 }]}

@@ -17,11 +17,6 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     borderRadius: 20
   },
-  text: {
-    color: Colors.genericColors.clear,
-    fontSize: 22,
-    textAlign: 'center',
-  },
   textInput: {
     height: 40,
     width: 240,

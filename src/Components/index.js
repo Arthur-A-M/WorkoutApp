@@ -1,9 +1,16 @@
-import { Text, View, Pressable, Image, TextInput } from 'react-native';
+import { Text, 
+  View, 
+  Pressable, 
+  Image, 
+  TextInput, 
+  Modal } from 'react-native';
 import React from 'react';
 import { Colors } from '../Styles/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import { styles } from './styles';
+
+import { unifiedStyles } from '../Styles/styles';
 
 export const ExerciseButton = ({ type, onPress }) => {
     const imageSource = type === "ResistenceTrainning" 
@@ -73,3 +80,25 @@ export const renderTimerIcon = (timerRunning) => {
     return <AntDesign name="play" size={30} color={Colors.coreColors.main} />;
   }
 };
+
+export const Warning = ({ visible, onPress, onRequestClose }) => {
+  return (
+    <Modal
+    animationType="slide"
+    transparent={true}
+    visible={visible}
+    onRequestClose={onRequestClose}
+  >
+    <View style={unifiedStyles.containedView}>
+      <View style={unifiedStyles.modalView}>
+        <Text style={unifiedStyles.bigText}>Some values are empity</Text>
+        <Pressable
+          style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
+          onPress={onPress}>
+          <Text>Continue Filling</Text>
+        </Pressable>
+      </View>
+    </View>
+  </Modal>
+  );
+}

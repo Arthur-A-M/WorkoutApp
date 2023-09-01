@@ -28,9 +28,5 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  text: {
-    color: Colors.genericColors.clear,
-    fontSize: 22,
-    textAlign: 'center',
-  },
+
 });

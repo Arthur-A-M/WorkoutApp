@@ -1,5 +1,13 @@
-import { Text, View, Pressable, FlatList, TextInput, Modal } from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import { Text, 
+  View, 
+  Pressable, 
+  FlatList, 
+  TextInput, 
+  Modal } from 'react-native';
+import React, 
+{ useState, 
+  useEffect, 
+  useCallback } from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list'
 
@@ -91,7 +99,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
         >
           <View style={unifiedStyles.containedView}>
             <View style={unifiedStyles.modalView}>
-              <Text style={styles.text}>{badValue}</Text>
+              <Text style={unifiedStyles.bigText}>{badValue}</Text>
               <Pressable
                 style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
                 onPress={() => setBadValue('')}>

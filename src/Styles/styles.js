@@ -37,4 +37,9 @@ export const unifiedStyles = StyleSheet.create({
     marginVertical: 25,
     borderRadius: 40,
   },
+  bigText: {
+    color: Colors.genericColors.clear,
+    fontSize: 22,
+    textAlign: 'center',
+  },
 });
