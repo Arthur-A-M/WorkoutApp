@@ -17,15 +17,6 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     borderRadius: 20
   },
-  modalView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-    width: 350,
-    borderColor: Colors.genericColors.calling,
-    borderWidth: 1,
-    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter, 
-  },
   text: {
     color: Colors.genericColors.clear,
     fontSize: 22,
@@ -40,12 +31,6 @@ export const styles = StyleSheet.create({
     color: Colors.genericColors.clear,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     textAlign: 'center',
-  },
-  pressable: {
-    width: '65%',
-    height: 70,
-    marginVertical: 25,
-    borderRadius: 40,
   },
   pressableCreated: {
     height: 70,

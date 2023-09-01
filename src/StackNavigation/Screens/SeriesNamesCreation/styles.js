@@ -3,15 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../../Styles/Colors';
 
 export const styles = StyleSheet.create({
-  modalView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-    width: 350,
-    borderColor: Colors.genericColors.calling,
-    borderWidth: 1,
-    backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter, 
-  },
   flatListTextInput: {
    width: '100%',
   },
@@ -32,12 +23,6 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter,
     marginVertical: 15
-  },
-  pressable: {
-    width: '65%',
-    height: 70,
-    marginVertical: 25,
-    borderRadius: 40,
   },
   textpressable: {
     fontSize: 20,

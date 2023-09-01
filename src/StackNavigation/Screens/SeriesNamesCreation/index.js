@@ -90,10 +90,10 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           onRequestClose={() => setBadValue('')}
         >
           <View style={unifiedStyles.containedView}>
-            <View style={styles.modalView}>
+            <View style={unifiedStyles.modalView}>
               <Text style={styles.text}>{badValue}</Text>
               <Pressable
-                style={[unifiedStyles.pressableMainColor, styles.pressable]}
+                style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
                 onPress={() => setBadValue('')}>
                 <Text>Continue Filling</Text>
               </Pressable>
@@ -107,7 +107,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           style={styles.flatListTextInput}
         />
         <Pressable
-          style={[unifiedStyles.pressableMainColor, styles.pressable]}
+          style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
           onPress={createSeries}>
           <Text style={styles.textpressable}>Create series</Text>
         </Pressable>
@@ -129,7 +129,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           placeholder="N° of series"
         />
         <Pressable
-          style={[unifiedStyles.pressableMainColor, styles.pressable]}
+          style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
           onPress={() => {
             if (checkInteger(numberOfSeries) && numberOfSeries > 0) {
               defineListOfNames();

@@ -87,10 +87,10 @@ export default function ExercisesCreationScreen({ navigation, route }) {
           onRequestClose={() => setEmpityValue(!empityValue)}
         >
           <View style={unifiedStyles.containedView}>
-            <View style={styles.modalView}>
+            <View style={unifiedStyles.modalView}>
               <Text style={styles.text}>Some values are empity</Text>
               <Pressable
-                style={[unifiedStyles.pressableMainColor, styles.pressable]}
+                style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
                 onPress={() => setEmpityValue(!empityValue)}>
                 <Text>Continue Filling</Text>
               </Pressable>
@@ -104,12 +104,12 @@ export default function ExercisesCreationScreen({ navigation, route }) {
         {keyboardStatus ? null
           : <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable
-              style={[[unifiedStyles.pressableMainColor, styles.pressable], { marginVertical: 20 }]}
+              style={[[unifiedStyles.pressableMainColor, unifiedStyles.pressable], { marginVertical: 20 }]}
               onPress={handleExerciseCreation}>
               <Text>Create exercises</Text>
             </Pressable>
             <Pressable
-              style={[[unifiedStyles.pressableMainColor, styles.pressable], { width: 100, marginLeft: 8, height: 40 }]}
+              style={[[unifiedStyles.pressableMainColor, unifiedStyles.pressable], { width: 100, marginLeft: 8, height: 40 }]}
               onPress={() => { setNumberOfExercises(0); setExercises([]); }}>
               <Text>Redefine exercises</Text>
             </Pressable>
@@ -133,7 +133,7 @@ export default function ExercisesCreationScreen({ navigation, route }) {
           placeholder="N° of series"
         />
         <Pressable
-          style={[unifiedStyles.pressableMainColor, styles.pressable]}
+          style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
           onPress={defineListOfexercises}>
           <Text>Define exercises</Text>
         </Pressable>
