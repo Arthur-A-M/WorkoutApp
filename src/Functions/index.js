@@ -101,3 +101,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     return emailRegex.test(email.trim());
   };
 
+ export function hash(str) {
+  let hashValue = 0;
+  for (let i = 0; i < str.length; i++) {
+    hashValue = (hashValue << 5) - hashValue + str.charCodeAt(i);
+    hashValue &= hashValue; // Convert to 32-bit integer
+  }
+  return String(hashValue);
+}

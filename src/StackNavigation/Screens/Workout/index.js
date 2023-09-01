@@ -1,7 +1,7 @@
 import { Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-import { ReturnTime, storeObjectData, getObjectData } from '../../../Functions';
+import { ReturnTime, storeObjectData, getObjectData, hash } from '../../../Functions';
 import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
 import { renderTimerIcon } from '../../../Components';
@@ -25,15 +25,6 @@ export default function WorkoutScreen({ route }) {
     }
     fetchData();
   }, []);
-
-  function hash(str) {
-    let hashValue = 0;
-    for (let i = 0; i < str.length; i++) {
-      hashValue = (hashValue << 5) - hashValue + str.charCodeAt(i);
-      hashValue &= hashValue; // Convert to 32-bit integer
-    }
-    return String(hashValue);
-  }
 
   const toggleCheck = (index) => {
     const checkedTemp = [...checkedExercises];
