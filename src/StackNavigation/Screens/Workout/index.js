@@ -2,14 +2,13 @@ import { Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 import { ReturnTime, storeObjectData, getObjectData, hash } from '../../../Functions';
-import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
 import { renderTimerIcon } from '../../../Components';
 
 import { styles } from './styles';
 
 export default function WorkoutScreen({ route }) {
-  const [checkedExercises, setCheckedExercises] = useState([]);
+  const [exercisesCounters, setExercisesCounters] = useState([]);
   const [timerRunning, setTimerRunning] = useState(false);
   const [time, setTime] = useState(0);
   const [realtime, setRealTime] = useState([0, 0]);
@@ -21,31 +20,45 @@ export default function WorkoutScreen({ route }) {
   useEffect(() => {
     async function fetchData() {
       const checkedTemp = await getObjectData(storageKey);
-      setCheckedExercises(checkedTemp || []);
+      setExercisesCounters(checkedTemp || []);
     }
     fetchData();
   }, []);
 
-  const toggleCheck = (index) => {
-    const checkedTemp = [...checkedExercises];
-    checkedTemp[index] = !checkedTemp[index];
-    setCheckedExercises(checkedTemp);
+  useEffect(() => {
+    console.log(exercisesCounters);
+  }, [exercisesCounters]);
+
+  const updateCheck = (index, series) => {
+    const checkedTemp = [...exercisesCounters];
+    if (typeof checkedTemp[index] === 'number') {
+      if (checkedTemp[index] >= series) {
+        checkedTemp[index] = 0;
+      }else{
+        checkedTemp[index] = checkedTemp[index] + 1;
+      }
+    } else {
+      checkedTemp[index] = 0
+    }
+    setExercisesCounters(checkedTemp);
     storeObjectData(storageKey, checkedTemp);
   };
 
 const renderExercise = ({ item, index }) => {
   const { name, series, repetitions, rest, load } = item;
-  const isChecked = checkedExercises[index];
+  const chekingCounter = exercisesCounters[index];
 
   return (
     <View key={item[0]} style={styles.viewExercise}>
       <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
       <Pressable
         style={styles.seriesPressable}
-        onLongPress={() => toggleCheck(index)}
+        onLongPress={() => updateCheck(index, Number(item.series))}
         delayLongPress={200}
       >
-        {isChecked && <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>}
+        {chekingCounter >= Number(item.series) ?
+          <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>:
+         <Text style={[styles.text, { fontSize: 50 }]}>{chekingCounter}</Text>}
       </Pressable>
       <View>
         <Text style={styles.text}>Series</Text>
