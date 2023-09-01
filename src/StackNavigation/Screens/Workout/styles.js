@@ -15,13 +15,20 @@ export const styles = StyleSheet.create({
     borderColor: Colors.genericColors.clear,
     borderTopWidth: 1,
   },
-  pressableExercises: {
+  viewExercise: {
     width: Dimensions.get('window').width * 0.6,
     height: Dimensions.get('window').height * 0.7,
     marginVertical: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: 10,
+    borderColor: Colors.genericColors.clear,
+    borderWidth: 1,
+    marginHorizontal: 25,
+  },
+  seriesPressable: {
+    width: 70,
+    height: 70,
     borderColor: Colors.genericColors.clear,
     borderWidth: 1,
     marginHorizontal: 25,

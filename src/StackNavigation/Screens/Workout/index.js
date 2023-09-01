@@ -33,43 +33,37 @@ export default function WorkoutScreen({ route }) {
     storeObjectData(storageKey, checkedTemp);
   };
 
-  const renderExercise = ({ item, index }) => (
-    <View
-      key={item[0]}
-      style={styles.pressableExercises}
-    >
-      <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
+const renderExercise = ({ item, index }) => {
+  const { name, series, repetitions, rest, load } = item;
+  const isChecked = checkedExercises[index];
+
+  return (
+    <View key={item[0]} style={styles.viewExercise}>
+      <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
       <Pressable
-        style={{ width: 70, height: 70, borderColor: Colors.genericColors.clear, borderWidth: 1, marginHorizontal: 25 }}
+        style={styles.seriesPressable}
         onLongPress={() => toggleCheck(index)}
         delayLongPress={200}
       >
-        {checkedExercises[index] ? (
-
-          <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>
-
-        ) : null}
+        {isChecked && <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>}
       </Pressable>
       <View>
         <Text style={styles.text}>Series</Text>
-        <Text style={styles.text}>{item.series}</Text>
+        <Text style={styles.text}>{series}</Text>
       </View>
       <View style={styles.viewData}>
-        <View style={styles.viewDataType}>
-          <Text style={styles.text}>Reps</Text>
-          <Text style={styles.text}>{item.repetitions}</Text>
-        </View>
-        <View style={[styles.viewDataType, { borderLeftWidth: 1, borderRightWidth: 1 }]}>
-          <Text style={styles.text}>Rest</Text>
-          <Text style={styles.text}>{item.rest}s</Text>
-        </View>
-        <View style={styles.viewDataType}>
-          <Text style={styles.text}>Load</Text>
-          <Text style={styles.text}>{item.load}Kg</Text>
-        </View>
+        {['Reps', 'Rest', 'Load'].map((label) => (
+          <View key={label} style={styles.viewDataType}>
+            <Text style={styles.text}>{label}</Text>
+            <Text style={styles.text}>
+              {label === 'Reps' ? repetitions : label === 'Rest' ? `${rest}s` : `${load}Kg`}
+            </Text>
+          </View>
+        ))}
       </View>
     </View>
   );
+};
 
   useEffect(() => {
     let interval;
