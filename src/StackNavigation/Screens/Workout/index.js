@@ -49,7 +49,7 @@ export default function WorkoutScreen({ route }) {
     >
       <Text style={[styles.text, { marginTop: 10 }]}>{item.name}</Text>
       <Pressable
-      style={{width: 70, height: 70, borderColor: Colors.genericColors.clear, borderWidth: 1, marginHorizontal: 25}}
+        style={{ width: 70, height: 70, borderColor: Colors.genericColors.clear, borderWidth: 1, marginHorizontal: 25 }}
         onLongPress={() => toggleCheck(index)}
         delayLongPress={200}
       >
@@ -59,14 +59,18 @@ export default function WorkoutScreen({ route }) {
 
         ) : null}
       </Pressable>
+      <View>
+        <Text style={styles.text}>Series</Text>
+        <Text style={styles.text}>{item.series}</Text>
+      </View>
       <View style={styles.viewData}>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Reps</Text>
           <Text style={styles.text}>{item.repetitions}</Text>
         </View>
         <View style={[styles.viewDataType, { borderLeftWidth: 1, borderRightWidth: 1 }]}>
-          <Text style={styles.text}>Series</Text>
-          <Text style={styles.text}>{item.series}</Text>
+          <Text style={styles.text}>Rest</Text>
+          <Text style={styles.text}>{item.rest}s</Text>
         </View>
         <View style={styles.viewDataType}>
           <Text style={styles.text}>Load</Text>
