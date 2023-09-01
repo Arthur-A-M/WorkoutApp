@@ -1,9 +1,11 @@
-import { Text, 
-  View, 
-  Pressable, 
-  Image, 
-  TextInput, 
-  Modal } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  Image,
+  TextInput,
+  Modal
+} from 'react-native';
 import React from 'react';
 import { Colors } from '../Styles/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
@@ -13,27 +15,27 @@ import { styles } from './styles';
 import { unifiedStyles } from '../Styles/styles';
 
 export const ExerciseButton = ({ type, onPress }) => {
-    const imageSource = type === "ResistenceTrainning" 
-        ? require("../../assets/ResistenceTrainning.jpg")
-        : require("../../assets/HIIT.jpg");
+  const imageSource = type === "ResistenceTrainning"
+    ? require("../../assets/ResistenceTrainning.jpg")
+    : require("../../assets/HIIT.jpg");
 
-    return (
-        <Pressable
-            style={({ pressed }) => [
-                styles.pressableStartingExercises,
-                pressed && styles.pressableStartingClicked,
-            ]}
-            onPress={onPress}
-        >
-            <View style={styles.viewStartingExercise}>
-                <Image source={imageSource} style={styles.imageStartingExercises} />
-                <Text style={styles.textStartingExercises}>
-                    {type === "ResistenceTrainning" ? "Resistence" : "Cardio"}
-                </Text>
-                <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
-            </View>
-        </Pressable>
-    );
+  return (
+    <Pressable
+      style={({ pressed }) => [
+        styles.pressableStartingExercises,
+        pressed && styles.pressableStartingClicked,
+      ]}
+      onPress={onPress}
+    >
+      <View style={styles.viewStartingExercise}>
+        <Image source={imageSource} style={styles.imageStartingExercises} />
+        <Text style={styles.textStartingExercises}>
+          {type === "ResistenceTrainning" ? "Resistence" : "Cardio"}
+        </Text>
+        <AntDesign name="rightcircle" size={45} color={Colors.coreColors.main} />
+      </View>
+    </Pressable>
+  );
 };
 
 export const renderExercise = ({ item, index, onChangeText, keyboard }) => {
@@ -84,21 +86,21 @@ export const renderTimerIcon = (timerRunning) => {
 export const Warning = ({ visible, onPress, onRequestClose }) => {
   return (
     <Modal
-    animationType="slide"
-    transparent={true}
-    visible={visible}
-    onRequestClose={onRequestClose}
-  >
-    <View style={unifiedStyles.containedView}>
-      <View style={unifiedStyles.modalView}>
-        <Text style={unifiedStyles.bigText}>Some values are empity</Text>
-        <Pressable
-          style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
-          onPress={onPress}>
-          <Text>Continue Filling</Text>
-        </Pressable>
+      animationType="slide"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onRequestClose}
+    >
+      <View style={unifiedStyles.containedView}>
+        <View style={unifiedStyles.modalView}>
+          <Text style={unifiedStyles.bigText}>Some values are empity</Text>
+          <Pressable
+            style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
+            onPress={onPress}>
+            <Text>Continue Filling</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
-  </Modal>
+    </Modal>
   );
 }

@@ -1,13 +1,17 @@
-import { Text, 
-  View, 
-  Pressable, 
-  FlatList, 
-  TextInput, 
-  Modal } from 'react-native';
-import React, 
-{ useState, 
-  useEffect, 
-  useCallback } from 'react';
+import {
+  Text,
+  View,
+  Pressable,
+  FlatList,
+  TextInput,
+  Modal
+} from 'react-native';
+import React,
+{
+  useState,
+  useEffect,
+  useCallback
+} from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list'
 

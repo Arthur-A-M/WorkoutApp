@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable
+} from 'react-native';
 
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
-import { storeObjectData, 
-  getObjectData, 
-  isValidPassword, 
-  isValidEmail } from '../../../Functions';
+import {
+  storeObjectData,
+  getObjectData,
+  isValidPassword,
+  isValidEmail
+} from '../../../Functions';
 import { Colors } from '../../../Styles/Colors'
 import { unifiedStyles } from '../../../Styles/styles';
 

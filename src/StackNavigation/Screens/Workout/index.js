@@ -1,7 +1,17 @@
-import { Text, View, Pressable, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  FlatList
+} from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-import { ReturnTime, storeObjectData, getObjectData, hash } from '../../../Functions';
+import {
+  ReturnTime,
+  storeObjectData,
+  getObjectData,
+  hash
+} from '../../../Functions';
 import { unifiedStyles } from '../../../Styles/styles';
 import { renderTimerIcon } from '../../../Components';
 
@@ -34,7 +44,7 @@ export default function WorkoutScreen({ route }) {
     if (typeof checkedTemp[index] === 'number') {
       if (checkedTemp[index] >= series) {
         checkedTemp[index] = 0;
-      }else{
+      } else {
         checkedTemp[index] = checkedTemp[index] + 1;
       }
     } else {
@@ -44,39 +54,39 @@ export default function WorkoutScreen({ route }) {
     storeObjectData(storageKey, checkedTemp);
   };
 
-const renderExercise = ({ item, index }) => {
-  const { name, series, repetitions, rest, load } = item;
-  const chekingCounter = exercisesCounters[index];
+  const renderExercise = ({ item, index }) => {
+    const { name, series, repetitions, rest, load } = item;
+    const chekingCounter = exercisesCounters[index];
 
-  return (
-    <View key={item[0]} style={styles.viewExercise}>
-      <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
-      <Pressable
-        style={styles.seriesPressable}
-        onLongPress={() => updateCheck(index, Number(item.series))}
-        delayLongPress={200}
-      >
-        {chekingCounter >= Number(item.series) ?
-          <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text>:
-         <Text style={[styles.text, { fontSize: 50 }]}>{chekingCounter}</Text>}
-      </Pressable>
-      <View>
-        <Text style={styles.text}>Series</Text>
-        <Text style={styles.text}>{series}</Text>
+    return (
+      <View key={item[0]} style={styles.viewExercise}>
+        <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
+        <Pressable
+          style={styles.seriesPressable}
+          onLongPress={() => updateCheck(index, Number(item.series))}
+          delayLongPress={200}
+        >
+          {chekingCounter >= Number(item.series) ?
+            <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text> :
+            <Text style={[styles.text, { fontSize: 50 }]}>{chekingCounter}</Text>}
+        </Pressable>
+        <View>
+          <Text style={styles.text}>Series</Text>
+          <Text style={styles.text}>{series}</Text>
+        </View>
+        <View style={styles.viewData}>
+          {['Reps', 'Rest', 'Load'].map((label) => (
+            <View key={label} style={styles.viewDataType}>
+              <Text style={styles.text}>{label}</Text>
+              <Text style={styles.text}>
+                {label === 'Reps' ? repetitions : label === 'Rest' ? `${rest}s` : `${load}Kg`}
+              </Text>
+            </View>
+          ))}
+        </View>
       </View>
-      <View style={styles.viewData}>
-        {['Reps', 'Rest', 'Load'].map((label) => (
-          <View key={label} style={styles.viewDataType}>
-            <Text style={styles.text}>{label}</Text>
-            <Text style={styles.text}>
-              {label === 'Reps' ? repetitions : label === 'Rest' ? `${rest}s` : `${load}Kg`}
-            </Text>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
-};
+    );
+  };
 
   useEffect(() => {
     let interval;

@@ -1,4 +1,9 @@
-import { Text, View, Pressable, ActivityIndicator } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  ActivityIndicator
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { getStringData } from '../../../Functions';
@@ -68,9 +73,9 @@ export default function HomeScreen({ navigation, route }) {
           onPress={goToWorkoutScreen}
         />
         <ExerciseButton
-         type={"Cardio"} 
-         onPress={() => navigation.navigate('Cardio', { email })}
-         />
+          type={"Cardio"}
+          onPress={() => navigation.navigate('Cardio', { email })}
+        />
       </View>
       <View style={styles.viewCreatingExercises}>
         <Pressable

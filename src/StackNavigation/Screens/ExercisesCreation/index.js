@@ -1,9 +1,11 @@
-import { Keyboard, 
-  Text, 
-  View, 
-  Pressable, 
-  FlatList, 
-  Modal } from 'react-native';
+import {
+  Keyboard,
+  Text,
+  View,
+  Pressable,
+  FlatList,
+  Modal
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list';

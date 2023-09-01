@@ -1,5 +1,15 @@
-import { Text, View, Pressable, TextInput } from 'react-native';
-import React, { useEffect, useState, useCallback } from 'react';
+import {
+  Text,
+  View,
+  Pressable,
+  TextInput
+} from 'react-native';
+import React,
+{
+  useEffect,
+  useState,
+  useCallback
+} from 'react';
 
 import { SelectList } from 'react-native-dropdown-select-list';
 
