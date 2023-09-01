@@ -41,6 +41,7 @@ export const renderExercise = ({ item, index, onChangeText, keyboard }) => {
     const placeholder =
       key === 'load' ? 'load in kg' : key === 'rest' ? 'rest in seconds' : key;
     const keyboardType = key === 'name' ? 'default' : 'numeric';
+    const maxLength = key === 'name' ? 30 : 3;
 
     return (
       <TextInput
@@ -52,6 +53,7 @@ export const renderExercise = ({ item, index, onChangeText, keyboard }) => {
         placeholderTextColor={Colors.genericColors.clear}
         keyboardType={keyboardType}
         onSubmitEditing={keyboard}
+        maxLength={maxLength}
       />
     );
   };
