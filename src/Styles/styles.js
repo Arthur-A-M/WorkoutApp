@@ -23,10 +23,10 @@ export const unifiedStyles = StyleSheet.create({
     backgroundColor: Colors.coreColors.main,
   },
   modalView: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: 200,
-    width: 350,
+    height: 250,
+    width: 300,
     borderColor: Colors.genericColors.calling,
     borderWidth: 1,
     backgroundColor: Colors.coreDirevied.secundaryDirevied.monocromaticLighter, 

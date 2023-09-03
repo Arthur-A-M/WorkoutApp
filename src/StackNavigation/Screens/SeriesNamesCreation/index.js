@@ -100,6 +100,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           visible={modal}
           onPress={() => setBadValue('')}
           onRequestClose={() => setBadValue('')}
+          buttonText='Continue filling'
         />
         <FlatList
           contentContainerStyle={styles.flatListIems}

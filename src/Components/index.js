@@ -83,7 +83,7 @@ export const renderTimerIcon = (timerRunning) => {
   }
 };
 
-export const Warning = ({ warning, visible, onPress, onRequestClose }) => {
+export const Warning = ({ warning = '', visible, onPress, onRequestClose, buttonText = '', confirmation = false, secundaryText = '', onPressSecundary }) => {
   return (
     <Modal
       animationType="slide"
@@ -92,15 +92,61 @@ export const Warning = ({ warning, visible, onPress, onRequestClose }) => {
       onRequestClose={onRequestClose}
     >
       <View style={unifiedStyles.containedView}>
-        <View style={unifiedStyles.modalView}>
-          <Text style={unifiedStyles.bigText}>{warning}</Text>
-          <Pressable
-            style={[unifiedStyles.pressableMainColor, unifiedStyles.pressable]}
-            onPress={onPress}>
-            <Text>Continue Filling</Text>
-          </Pressable>
+        <View
+          style={[
+            unifiedStyles.modalView,
+            confirmation && {
+              borderColor: Colors.genericColors.clear,
+              borderRadius: 20,
+            },
+          ]}
+        >
+          <Text style={[unifiedStyles.bigText, { marginTop: 10 }]}>
+            {warning}
+          </Text>
+          {secundaryText && onPressSecundary ? (
+            <View style={{ flexDirection: 'row', width: '100%' }}>
+              <Pressable
+                style={[
+                  unifiedStyles.pressableMainColor,
+                  unifiedStyles.pressable,
+                  { width: '50%', marginVertical: 0, borderRadius: 0 },
+                  confirmation && { borderBottomLeftRadius: 20 },
+                ]}
+                onPress={onPress}
+              >
+                <Text>{buttonText}</Text>
+              </Pressable>
+              <Pressable
+                style={[
+                  unifiedStyles.pressableMainColor,
+                  unifiedStyles.pressable,
+                  { width: '50%', marginVertical: 0, borderRadius: 0 },
+                  confirmation && { borderBottomRightRadius: 20 },
+                ]}
+                onPress={onPressSecundary}
+              >
+                <Text>{secundaryText}</Text>
+              </Pressable>
+            </View>
+          ) : (
+
+            <Pressable
+              style={[
+                unifiedStyles.pressableMainColor,
+                unifiedStyles.pressable,
+                { width: '100%', marginVertical: 0, borderRadius: 0 },
+                confirmation && {
+                  borderBottomLeftRadius: 20,
+                  borderBottomRightRadius: 20,
+                },
+              ]}
+              onPress={onPress}
+            >
+              <Text>{buttonText}</Text>
+            </Pressable>)}
         </View>
       </View>
     </Modal>
   );
-}
+};

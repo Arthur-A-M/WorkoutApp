@@ -92,6 +92,10 @@ export default function ExercisesCreationScreen({ navigation, route }) {
           visible={empityValue}
           onPress={() => setEmpityValue(!empityValue)}
           onRequestClose={() => setEmpityValue(!empityValue)}
+          buttonText='Continue filling'
+          confirmation={false}
+          secundaryText='Eu estou aqui'
+          onPressSecundary={() => setEmpityValue(!empityValue)}
         />
         <FlatList
           data={exercises}
