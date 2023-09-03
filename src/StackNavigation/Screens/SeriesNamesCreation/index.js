@@ -135,8 +135,6 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
           onPress={() => {
             if (checkInteger(numberOfSeries) && numberOfSeries > 0) {
               defineListOfNames();
-            } else {
-              alert('Please enter a valid number of series.');
             }
           }}
         >

@@ -13,7 +13,7 @@ import {
   hash
 } from '../../../Functions';
 import { unifiedStyles } from '../../../Styles/styles';
-import { renderTimerIcon } from '../../../Components';
+import { renderTimerIcon, Warning } from '../../../Components';
 
 import { styles } from './styles';
 
@@ -22,10 +22,15 @@ export default function WorkoutScreen({ route }) {
   const [timerRunning, setTimerRunning] = useState(false);
   const [time, setTime] = useState(0);
   const [realtime, setRealTime] = useState([0, 0]);
+  const [confirmation, setConfirmation] = useState([false, 0, 0]);
 
   const { exercises } = route.params;
 
   const storageKey = hash(JSON.stringify(exercises));
+
+  useEffect(() => {
+    console.log('confirmarion', confirmation);
+  },[confirmation]);
 
   useEffect(() => {
     async function fetchData() {
@@ -42,13 +47,17 @@ export default function WorkoutScreen({ route }) {
   const updateCheck = (index, series) => {
     const checkedTemp = [...exercisesCounters];
     if (typeof checkedTemp[index] === 'number') {
-      if (checkedTemp[index] >= series) {
+      if (checkedTemp[index] >= series && !confirmation[0]) {
+        setConfirmation([true, index, series]);
+      }else if (checkedTemp[index] >= series && confirmation[0]) {
+        setConfirmation([false, 0, 0]);
         checkedTemp[index] = 0;
-      } else {
+      }
+      else {
         checkedTemp[index] = checkedTemp[index] + 1;
       }
     } else {
-      checkedTemp[index] = 0
+      checkedTemp[index] = 0;
     }
     setExercisesCounters(checkedTemp);
     storeObjectData(storageKey, checkedTemp);
@@ -63,8 +72,7 @@ export default function WorkoutScreen({ route }) {
         <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
         <Pressable
           style={styles.seriesPressable}
-          onLongPress={() => updateCheck(index, Number(item.series))}
-          delayLongPress={200}
+          onPress={() => updateCheck(index, Number(item.series))}
         >
           {chekingCounter >= Number(item.series) ?
             <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text> :
@@ -124,6 +132,14 @@ export default function WorkoutScreen({ route }) {
 
   return (
     <View style={unifiedStyles.container}>
+      <Warning 
+      warning='You are resetting the exercise counter.'
+      visible={confirmation[0]}
+      buttonText='Reset counter'
+      onPress={() => updateCheck(confirmation[1], confirmation[2])}
+      secundaryText='Leave it done'
+      onPressSecundary={() => setConfirmation([false, 0, 0])}
+      />
       <FlatList
         contentContainerStyle={{ alignItems: 'center' }}
         data={exercises}
