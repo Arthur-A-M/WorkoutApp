@@ -15,8 +15,6 @@ import { Colors } from '../../../Styles/Colors';
 import { unifiedStyles } from '../../../Styles/styles';
 
 
-import { styles } from './styles';
-
 export default function ExercisesCreationScreen({ navigation, route }) {
   const [numberOfExercises, setNumberOfExercises] = useState(0);
   const [exercises, setExercises] = useState([]);
@@ -142,21 +140,16 @@ export default function ExercisesCreationScreen({ navigation, route }) {
   } else {
     return (
       <View style={unifiedStyles.container}>
-        <View style={styles.viewCreated}>
-          <Text style={[unifiedStyles.bigText, { marginTop: 25 }]}>{serie}{'\n'}Created</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Pressable
-              style={[unifiedStyles.containedView, styles.pressableCreated, { borderBottomLeftRadius: 20 }]}
-              onPress={navigation.goBack}>
-              <Text>Finish</Text>
-            </Pressable>
-            <Pressable
-              style={[unifiedStyles.containedView, styles.pressableCreated, { borderBottomRightRadius: 20 }]}
-              onPress={() => setCreated(false)}>
-              <Text>Edit more</Text>
-            </Pressable>
-          </View>
-        </View>
+        <Warning
+          warning={serie + '\nCreated'}
+          visible={true}
+          onPress={navigation.goBack}
+          onRequestClose={() => setCreated(false)}
+          buttonText='Finish'
+          confirmation={true}
+          secundaryText='Edit more'
+          onPressSecundary={() => setCreated(false)}
+        />
       </View>
     )
   }
