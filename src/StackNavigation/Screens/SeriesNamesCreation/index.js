@@ -72,7 +72,7 @@ export default function SeriesNamesCreationScreen({ navigation, route }) {
         return;
       }
       await storeObjectData(email, seriesNames);
-      navigation.goBack();
+      navigation.navigate('Login');
     } catch (error) {
       console.error(error);
     }
