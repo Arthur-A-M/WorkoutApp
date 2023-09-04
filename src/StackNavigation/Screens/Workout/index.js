@@ -17,6 +17,8 @@ import { renderTimerIcon, Warning } from '../../../Components';
 
 import { styles } from './styles';
 
+import { useKeepAwake, activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
+
 export default function WorkoutScreen({ route }) {
   const [exercisesCounters, setExercisesCounters] = useState([]);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -29,8 +31,15 @@ export default function WorkoutScreen({ route }) {
   const storageKey = hash(JSON.stringify(exercises));
 
   useEffect(() => {
-    console.log('confirmarion', confirmation);
-  },[confirmation]);
+    const enableKeepAwake = async () => {
+        await activateKeepAwakeAsync();
+    }
+    if (timerRunning) {
+        enableKeepAwake();
+    } else {
+        deactivateKeepAwake();
+    }
+}, [timerRunning]);
 
   useEffect(() => {
     async function fetchData() {
