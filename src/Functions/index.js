@@ -45,15 +45,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     }
   }
 
-  export const ReturnTime = (time) => {
-    const timeInSeconds = time;
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    const formattedMinutes = minutes.toLocaleString('en-US', { minimumIntegerDigits: 2 });
-    const formattedSeconds = seconds.toLocaleString('en-US', { minimumIntegerDigits: 2 });
-    const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
-    return formattedTime;
-  }
+export const ReturnTime = (time, rest) => {
+  const formattedTime = (time > rest) ? time - rest : rest - time;
+  const formattedMinutes = Math.floor(formattedTime / 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
+  const formattedSeconds = (formattedTime % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
+  return (time > rest) ? `${formattedMinutes}:${formattedSeconds} extras`:`${formattedMinutes}:${formattedSeconds}` ;
+}
 
   export const checkInteger = (value) => {
     if (isNaN(parseInt(value))) {

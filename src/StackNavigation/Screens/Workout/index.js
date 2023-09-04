@@ -25,6 +25,7 @@ export default function WorkoutScreen({ route }) {
   const [time, setTime] = useState(0);
   const [realtime, setRealTime] = useState([0, 0]);
   const [confirmation, setConfirmation] = useState([false, 0, 0]);
+  const [currentRest, setCurrentRest] = useState(0);
 
   const { exercises } = route.params;
 
@@ -53,7 +54,7 @@ export default function WorkoutScreen({ route }) {
     console.log(exercisesCounters);
   }, [exercisesCounters]);
 
-  const updateCheck = (index, series) => {
+  const updateCheck = (index, series, rest=0) => {
     const checkedTemp = [...exercisesCounters];
     if (typeof checkedTemp[index] === 'number') {
       if (checkedTemp[index] >= series && !confirmation[0]) {
@@ -64,6 +65,7 @@ export default function WorkoutScreen({ route }) {
       }
       else {
         checkedTemp[index] = checkedTemp[index] + 1;
+        setCurrentRest(rest);
       }
     } else {
       checkedTemp[index] = 0;
@@ -81,7 +83,7 @@ export default function WorkoutScreen({ route }) {
         <Text style={[styles.text, { marginTop: 10 }]}>{name}</Text>
         <Pressable
           style={styles.seriesPressable}
-          onPress={() => updateCheck(index, Number(item.series))}
+          onPress={() => updateCheck(index, Number(item.series), Number(item.rest))}
         >
           {chekingCounter >= Number(item.series) ?
             <Text style={[styles.text, { fontSize: 50 }]}>{'\u2714'}</Text> :
@@ -121,7 +123,7 @@ export default function WorkoutScreen({ route }) {
 
   const renderTimerText = () => {
     if (timerRunning) {
-      return ReturnTime(time);
+      return ReturnTime(time, currentRest);
     } else {
       return 'Resting';
     }
