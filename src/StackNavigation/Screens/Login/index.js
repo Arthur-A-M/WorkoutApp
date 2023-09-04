@@ -35,7 +35,6 @@ export default function LoginScreen({ navigation }) {
         setEmail(data.email);
         setPassword(data.password);
         setRememberMe(true);
-        navigation.navigate('Home', { email });
       }
     };
 
