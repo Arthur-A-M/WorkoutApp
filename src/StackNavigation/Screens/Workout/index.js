@@ -68,7 +68,7 @@ export default function WorkoutScreen({ route }) {
         setCurrentRest(rest);
       }
     } else {
-      checkedTemp[index] = 0;
+      checkedTemp[index] = 1;
     }
     setExercisesCounters(checkedTemp);
     storeObjectData(storageKey, checkedTemp);
