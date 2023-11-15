@@ -16,7 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       console.log('the value is:', value);
       if (value !== null) {
         return value;
-      } else if (value === null || value === []) {
+      } else if (value === null || value == []) {
         console.log('No session found!');
         return null;
       }
